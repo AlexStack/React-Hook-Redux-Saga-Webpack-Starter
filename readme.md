@@ -1,6 +1,6 @@
 # React-Hook-Redux-Saga-Webpack-Starter
 
--   Create a new ReactJs project without use Create-React-App. Popular packages such as Redux, Saga, Hooks are ready to use immediately. Combine codes by webpack and can hot reload code changes - it will automatically refresh the dev page. save your time!
+-   Create a new ReactJs project without use Create-React-App. Popular packages such as Redux, Saga, Hooks are ready to use immediately. Compile codes by webpack and can hot reload code changes - it will automatically refresh the dev page. save your time!
 
 ## How to use?
 
@@ -13,8 +13,8 @@
 
 ## What included?
 
--   Lots of React required packages, such as react-dom, reux, saga, hook, webpack ... You do not need install them again, use them directly in your code.
--   Using webpack to combine and output the js file, tidy and clear and flexible.
+-   Lots of React required packages, such as react-dom, redux, saga, hook, webpack ... You do not need install them again, use them directly in your code.
+-   Using webpack to export the compiled js file, tidy and clear and flexible.
 -   **npm run dev** will automatically open a local dev demo page which can detect js file changes and show the result immediately.
 -   Clear React file & folder structures, won't confuse you at all.
 
