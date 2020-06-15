@@ -30,7 +30,7 @@ const BasicAppPresent = ({
           <h3 className="text-danger">Congratulation, you won!</h3>
           <div className="text-success">
             You've tried {keyPressTimes} times, your score is{" "}
-            {100 - (DkeyPressTimes - 1) * 2}/100
+            {100 - (keyPressTimes - 1) * 2}/100
           </div>
           Press Esc key to start the game again! or
           <br />
