@@ -1,0 +1,16 @@
+preset: laravel
+risky: false
+enabled:
+  - align_double_arrow
+  - align_equals
+disabled:
+  - unused_use
+  - unalign_equals
+finder:
+  exclude:
+    - modules
+    - node_modules
+    - storage
+    - vendor
+  name: "*.php"
+  not-name: "*.blade.php"
