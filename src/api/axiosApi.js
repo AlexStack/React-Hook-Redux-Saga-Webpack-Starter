@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default axios.create({
   baseURL: "https://packagist.org",
-  timeout: 1000,
+  timeout: 3000,
   responseType: "json",
   // default params may not working, details: https://github.com/axios/axios/issues/2190
   params: {

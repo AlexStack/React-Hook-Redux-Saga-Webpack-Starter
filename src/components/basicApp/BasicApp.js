@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import BasicAppPresent from "./BasicAppPresent";
-import FooterPresent from "../footer/FooterPresent";
 
 export default class BasicApp extends Component {
   constructor(props) {
@@ -71,7 +70,6 @@ export default class BasicApp extends Component {
           secretKey={this.state.secretKey}
           handleFieldChange={this.handleFieldChange}
         />
-        <FooterPresent />
       </div>
     );
   }

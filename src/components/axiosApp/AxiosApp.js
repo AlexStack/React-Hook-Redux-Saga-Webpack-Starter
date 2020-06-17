@@ -96,7 +96,6 @@ export default class AxiosApp extends Component {
           handleFieldChange={this.handleFieldChange}
           handleSearchSubmit={this.handleSearchSubmit}
         />
-        <FooterPresent />
       </div>
     );
   }

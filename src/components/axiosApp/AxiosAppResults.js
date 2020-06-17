@@ -26,7 +26,7 @@ const AxiosAppResults = ({ total, searchResults, handleFieldChange }) => {
           name="loadMore"
           onClick={handleFieldChange}
         >
-          Load More data
+          Load More Data
         </button>
       )}
       {/* Show additional information, pages, total */}
