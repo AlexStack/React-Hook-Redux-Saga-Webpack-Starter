@@ -29,12 +29,22 @@ const AxiosAppPresent = ({
             </div>
             <input
               type="text"
-              className="form-control"
+              name="keyword"
+              className="form-control text-success"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
               value={keyword}
               onChange={handleFieldChange}
             />
+            <div className="input-group-append">
+              <select onChange={handleFieldChange} name="perPage">
+                <option value="5">Display Number</option>
+                <option value="5">5 results per page</option>
+                <option value="10">10 results per page</option>
+                <option value="20">20 results per page</option>
+                <option value="50">50 results per page</option>
+              </select>
+            </div>
             <div className="input-group-append">
               <button className="btn btn-success" type="submit">
                 Search
@@ -45,7 +55,11 @@ const AxiosAppPresent = ({
       </form>
 
       {/* Display results */}
-      <AxiosAppResults total={total} searchResults={searchResults} />
+      <AxiosAppResults
+        total={total}
+        searchResults={searchResults}
+        handleFieldChange={handleFieldChange}
+      />
     </div>
   );
 };

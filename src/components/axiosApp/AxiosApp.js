@@ -10,8 +10,10 @@ export default class AxiosApp extends Component {
     super(props);
 
     this.state = {
-      keyword: "react",
+      keyword: "react api",
       searchResults: [],
+      page: 1,
+      perPage: 5,
       total: null,
     };
 
@@ -20,27 +22,42 @@ export default class AxiosApp extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount", this.state);
+    // console.log("componentDidMount", this.state);
   }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate", this.state);
+    // console.log("componentDidUpdate", this.state);
   }
 
   handleFieldChange = (event) => {
-    this.setState({
-      keyword: event.target.value,
-    });
+    if (event.target.name == "keyword") {
+      this.setState({
+        keyword: event.target.value,
+      });
+    } else if (event.target.name == "perPage") {
+      this.setState({
+        perPage: event.target.value,
+      });
+    } else if (event.target.name == "loadMore") {
+      const pageNumber = this.state.page + 1;
+      this.getApiResult(pageNumber);
+    }
+
+    console.log(this.state);
   };
 
-  // method 1: async await
-  handleSearchSubmit = async (event) => {
+  handleSearchSubmit = (event) => {
     event.preventDefault();
+    this.getApiResult(1);
+  };
+
+  async getApiResult(pageNumber) {
     const res = await axiosApi
       .get("/search.json", {
         params: {
           q: this.state.keyword,
-          per_page: 5,
+          per_page: this.state.perPage,
+          page: pageNumber,
         },
       })
       .catch((error) => {
@@ -50,31 +67,24 @@ export default class AxiosApp extends Component {
 
     if (res.data) {
       console.log(res.data);
-      this.setState({
-        searchResults: res.data.results,
-        total: res.data.total,
-      });
-    }
-  };
-
-  // method 2: promise
-  handleSearchSubmit2 = (event) => {
-    event.preventDefault();
-    axiosApi
-      .get("/search.json", {
-        params: {
-          q: this.state.keyword,
-          per_page: 4,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
+      if (pageNumber > 1) {
+        this.setState({
+          searchResults: [...this.state.searchResults, ...res.data.results],
+          total: res.data.total,
+          loadMore: false,
+          page: pageNumber,
+        });
+      } else {
         this.setState({
           searchResults: res.data.results,
           total: res.data.total,
+          loadMore: false,
+          page: 1,
         });
-      });
-  };
+      }
+    }
+    return res;
+  }
 
   render() {
     return (

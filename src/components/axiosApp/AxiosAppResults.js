@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AxiosAppResults = ({ total, searchResults }) => {
+const AxiosAppResults = ({ total, searchResults, handleFieldChange }) => {
   return (
     <>
       {searchResults.length > 0 &&
-        searchResults.map((item) => (
-          <div className="row text-left border-bottom p-3" key={item.name}>
+        searchResults.map((item, index) => (
+          <div className="row text-left border-bottom p-3" key={index}>
             <div className="col-md">
+              <span className="badge badge-secondary">{index + 1}</span>{" "}
               <a href={item.repository} target="_blank">
                 {item.name}
               </a>
@@ -19,7 +20,15 @@ const AxiosAppResults = ({ total, searchResults }) => {
             <div className="col-md text-secondary">{item.description}</div>
           </div>
         ))}
-
+      {total > 0 && total > searchResults.length && (
+        <button
+          className="btn btn-success m-2"
+          name="loadMore"
+          onClick={handleFieldChange}
+        >
+          Load More data
+        </button>
+      )}
       {/* Show additional information, pages, total */}
       {total === 0 && <div className="text-danger">No result</div>}
       {total > 0 && (
@@ -32,6 +41,7 @@ const AxiosAppResults = ({ total, searchResults }) => {
 AxiosAppResults.propTypes = {
   total: PropTypes.number,
   searchResults: PropTypes.array,
+  handleFieldChange: PropTypes.func,
 };
 
 export default AxiosAppResults;
