@@ -15,6 +15,7 @@ export default class AxiosApp extends Component {
       page: 1,
       perPage: 5,
       total: null,
+      loading: false,
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -22,11 +23,11 @@ export default class AxiosApp extends Component {
   }
 
   componentDidMount() {
-    // console.log("componentDidMount", this.state);
+    console.log("componentDidMount", this.state);
   }
 
   componentDidUpdate() {
-    // console.log("componentDidUpdate", this.state);
+    console.log("componentDidUpdate", this.state);
   }
 
   handleFieldChange = (event) => {
@@ -40,6 +41,9 @@ export default class AxiosApp extends Component {
       });
     } else if (event.target.name == "loadMore") {
       const pageNumber = this.state.page + 1;
+      this.setState({
+        loading: true,
+      });
       this.getApiResult(pageNumber);
     }
 
@@ -48,6 +52,11 @@ export default class AxiosApp extends Component {
 
   handleSearchSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      searchResults: [],
+      total: null,
+      loading: true,
+    });
     this.getApiResult(1);
   };
 
@@ -62,7 +71,9 @@ export default class AxiosApp extends Component {
       })
       .catch((error) => {
         console.log(error, res);
-        return error;
+        this.setState({
+          loading: false,
+        });
       });
 
     if (res.data) {
@@ -71,14 +82,14 @@ export default class AxiosApp extends Component {
         this.setState({
           searchResults: [...this.state.searchResults, ...res.data.results],
           total: res.data.total,
-          loadMore: false,
+          loading: false,
           page: pageNumber,
         });
       } else {
         this.setState({
           searchResults: res.data.results,
           total: res.data.total,
-          loadMore: false,
+          loading: false,
           page: 1,
         });
       }
@@ -95,6 +106,7 @@ export default class AxiosApp extends Component {
           searchResults={this.state.searchResults}
           handleFieldChange={this.handleFieldChange}
           handleSearchSubmit={this.handleSearchSubmit}
+          loading={this.state.loading}
         />
       </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AxiosAppResults = ({ total, searchResults, handleFieldChange }) => {
+const AxiosAppResults = ({ total, searchResults, handleFieldChange, loading}) => {
   return (
     <>
       {searchResults.length > 0 &&
@@ -25,8 +25,11 @@ const AxiosAppResults = ({ total, searchResults, handleFieldChange }) => {
           className="btn btn-success m-2"
           name="loadMore"
           onClick={handleFieldChange}
+          disabled={loading}
         >
           Load More Data
+          {loading && <i className="fas fa-spinner fa-spin ml-1"></i>
+          }
         </button>
       )}
       {/* Show additional information, pages, total */}
@@ -42,6 +45,7 @@ AxiosAppResults.propTypes = {
   total: PropTypes.number,
   searchResults: PropTypes.array,
   handleFieldChange: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default AxiosAppResults;

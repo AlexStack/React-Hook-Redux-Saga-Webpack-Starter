@@ -8,6 +8,7 @@ const AxiosAppPresent = ({
   searchResults,
   handleFieldChange,
   handleSearchSubmit,
+  loading
 }) => {
   return (
     <div className="mt-1 mb-5 pt-5 pb-5 pl-4 text-dark">
@@ -37,7 +38,7 @@ const AxiosAppPresent = ({
               onChange={handleFieldChange}
             />
             <div className="input-group-append">
-              <select onChange={handleFieldChange} name="perPage">
+              <select onChange={handleFieldChange} name="perPage" className="form-control text-secondary">
                 <option value="5">Display Number</option>
                 <option value="5">5 results per page</option>
                 <option value="10">10 results per page</option>
@@ -46,7 +47,7 @@ const AxiosAppPresent = ({
               </select>
             </div>
             <div className="input-group-append">
-              <button className="btn btn-success" type="submit">
+              <button className="btn btn-success" type="submit" disabled={loading && searchResults.length == 0}>
                 Search
               </button>
             </div>
@@ -54,11 +55,18 @@ const AxiosAppPresent = ({
         </div>
       </form>
 
+      {loading && searchResults.length == 0 && 
+        <div className="text-center text-success">
+          <i className="fas fa-spinner fa-spin mr-1"></i>Loading...
+        </div>
+      }
+
       {/* Display results */}
       <AxiosAppResults
         total={total}
         searchResults={searchResults}
         handleFieldChange={handleFieldChange}
+        loading={loading}
       />
     </div>
   );
@@ -70,6 +78,7 @@ AxiosAppPresent.propTypes = {
   searchResults: PropTypes.array,
   handleFieldChange: PropTypes.func,
   handleSearchSubmit: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default AxiosAppPresent;
