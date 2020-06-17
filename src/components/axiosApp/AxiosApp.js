@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import axiosApi from "../../api/axiosApi";
 import AxiosAppPresent from "./AxiosAppPresent";
-import FooterPresent from "../footer/FooterPresent";
+import RelatedFiles from "../footer/RelatedFiles";
 
 export default class AxiosApp extends Component {
   constructor(props) {
@@ -99,7 +99,7 @@ export default class AxiosApp extends Component {
 
   render() {
     return (
-      <div className="text-center text-danger">
+      <div className="text-center">
         <AxiosAppPresent
           keyword={this.state.keyword}
           total={this.state.total}
@@ -108,6 +108,15 @@ export default class AxiosApp extends Component {
           handleSearchSubmit={this.handleSearchSubmit}
           loading={this.state.loading}
         />
+
+        <RelatedFiles>
+          <li className="list-group-item">
+            src/components/AxiosApp/*.js --- React Components
+          </li>
+          <li className="list-group-item">
+            src/api/AxiosApi.js --- Axios common settings
+          </li>
+        </RelatedFiles>
       </div>
     );
   }

@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import BasicAppPresent from "./BasicAppPresent";
+import RelatedFiles from "../footer/RelatedFiles";
 
 export default class BasicApp extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ export default class BasicApp extends Component {
 
   render() {
     return (
-      <div className="text-center text-danger">
+      <div className="text-center">
         <BasicAppPresent
           clickTimes={this.state.clickTimes}
           keyPressTimes={this.state.keyPressTimes}
@@ -70,6 +71,21 @@ export default class BasicApp extends Component {
           secretKey={this.state.secretKey}
           handleFieldChange={this.handleFieldChange}
         />
+
+        <RelatedFiles>
+          <li className="list-group-item">
+            src/reactApp.js --- React main entry point
+          </li>
+          <li className="list-group-item">
+            src/components/BasicApp/*.js --- React Components
+          </li>
+          <li className="list-group-item">
+            src/components/header/*.js --- Reusable Header Components
+          </li>
+          <li className="list-group-item">
+            src/components/footer/*.js --- Reusable Footer Components
+          </li>
+        </RelatedFiles>
       </div>
     );
   }
