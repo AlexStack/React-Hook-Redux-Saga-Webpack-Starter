@@ -34,7 +34,11 @@ const HeaderPresent = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/" className="nav-link" onClick={() => hideNavbar("")}>
+            <NavLink
+              to="/axios"
+              className="nav-link"
+              onClick={() => hideNavbar("")}
+            >
               Axios API
             </NavLink>
           </li>

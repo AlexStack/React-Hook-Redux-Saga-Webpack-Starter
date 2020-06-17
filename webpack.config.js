@@ -22,6 +22,7 @@ module.exports = {
   },
   devtool: "inline-source-map",
   devServer: {
+    historyApiFallback: true,
     contentBase: "public",
     compress: false,
     inline: true,
