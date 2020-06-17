@@ -63,6 +63,6 @@ BasicAppPresent.propTypes = {
   keyPressTimes: PropTypes.number,
   pressedKey: PropTypes.string,
   secretKey: PropTypes.string,
-  handleFieldChange: PropTypes.object,
+  handleFieldChange: PropTypes.func,
 };
 export default BasicAppPresent;

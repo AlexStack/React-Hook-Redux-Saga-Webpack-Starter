@@ -54,8 +54,8 @@ AxiosAppPresent.propTypes = {
   keyword: PropTypes.string,
   total: PropTypes.number,
   searchResults: PropTypes.array,
-  handleFieldChange: PropTypes.function,
-  handleSearchSubmit: PropTypes.function,
+  handleFieldChange: PropTypes.func,
+  handleSearchSubmit: PropTypes.func,
 };
 
 export default AxiosAppPresent;
