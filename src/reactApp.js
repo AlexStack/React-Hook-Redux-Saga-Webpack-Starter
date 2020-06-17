@@ -10,15 +10,15 @@ export default class ReactApp extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container-fluid top-container">
-          <HeaderPresent />
+        <HeaderPresent />
+        <div className="container-fluid top-container react-js-main">
           <Switch>
             <Route exact path="/basic" component={BasicApp} />
             <Route path="/axios" component={AxiosApp} />
             <Route component={AxiosApp} />
           </Switch>
-          <FooterPresent />
         </div>
+        <FooterPresent />
       </Router>
     );
   }
