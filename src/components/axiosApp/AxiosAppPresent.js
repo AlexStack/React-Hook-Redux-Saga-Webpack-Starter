@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import AxiosAppResults from "./AxiosAppResults";
 
 const AxiosAppPresent = ({
   keyword,
@@ -20,22 +21,22 @@ const AxiosAppPresent = ({
 
       <form onSubmit={handleSearchSubmit}>
         <div className="text-success">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-default">
                 Keyword
               </span>
             </div>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
               value={keyword}
               onChange={handleFieldChange}
             />
-            <div class="input-group-append">
-              <button class="btn btn-success" type="submit">
+            <div className="input-group-append">
+              <button className="btn btn-success" type="submit">
                 Search
               </button>
             </div>
@@ -44,27 +45,7 @@ const AxiosAppPresent = ({
       </form>
 
       {/* Display results */}
-      {searchResults.length > 0 &&
-        searchResults.map((item) => (
-          <div className="row text-left border-bottom p-3">
-            <div className="col-md">
-              <a href={item.repository} target="_blank">
-                {item.name}
-              </a>
-              <div>
-                <i className="fas fa-download  text-success mr-1"></i>
-                {item.downloads}
-              </div>
-            </div>
-            <div className="col-md text-secondary">{item.description}</div>
-          </div>
-        ))}
-
-      {/* Show additional information, pages, total */}
-      {total === 0 && <div className="text-danger">No result</div>}
-      {total > 0 && (
-        <div className="text-danger m-3">Total results: {total}</div>
-      )}
+      <AxiosAppResults total={total} searchResults={searchResults} />
     </div>
   );
 };

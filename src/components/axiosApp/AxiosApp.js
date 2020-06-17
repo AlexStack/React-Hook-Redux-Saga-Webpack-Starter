@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import axiosApi from "../../api/axiosApi";
 import AxiosAppPresent from "./AxiosAppPresent";
 import FooterPresent from "../footer/FooterPresent";
 
@@ -33,30 +33,38 @@ export default class AxiosApp extends Component {
     });
   };
 
-  // method 1: async await 
+  // method 1: async await
   handleSearchSubmit = async (event) => {
     event.preventDefault();
-    const res = await axios.get("https://packagist.org/search.json", {
-      params: {
-        q: this.state.keyword,
-        per_page: 50,
-      },
-    });
-    console.log(res.data);
-    this.setState({
-      searchResults: res.data.results,
-      total: res.data.total,
-    });
+    const res = await axiosApi
+      .get("/search.json", {
+        params: {
+          q: this.state.keyword,
+          per_page: 5,
+        },
+      })
+      .catch((error) => {
+        console.log(error, res);
+        return error;
+      });
+
+    if (res.data) {
+      console.log(res.data);
+      this.setState({
+        searchResults: res.data.results,
+        total: res.data.total,
+      });
+    }
   };
 
   // method 2: promise
   handleSearchSubmit2 = (event) => {
     event.preventDefault();
-    axios
-      .get("https://packagist.org/search.json", {
+    axiosApi
+      .get("/search.json", {
         params: {
           q: this.state.keyword,
-          per_page: 40,
+          per_page: 4,
         },
       })
       .then((res) => {
