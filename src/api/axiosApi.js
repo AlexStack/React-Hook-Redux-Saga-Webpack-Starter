@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default axios.create({
+const packagistApi = axios.create({
   baseURL: "https://packagist.org",
   timeout: 3000,
   responseType: "json",
@@ -14,3 +14,5 @@ export default axios.create({
     Authorization: "Client Id change-here-if-authorization-needed",
   },
 });
+
+export default packagistApi;

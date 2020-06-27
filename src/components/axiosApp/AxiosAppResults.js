@@ -1,7 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AxiosAppResults = ({ total, searchResults, handleFieldChange, loading}) => {
+const AxiosAppResults = ({
+  total,
+  searchResults,
+  handleFieldChange,
+  loading,
+}) => {
   return (
     <>
       {searchResults.length > 0 &&
@@ -28,14 +33,16 @@ const AxiosAppResults = ({ total, searchResults, handleFieldChange, loading}) =>
           disabled={loading}
         >
           Load More Data
-          {loading && <i className="fas fa-spinner fa-spin ml-1"></i>
-          }
+          {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
         </button>
       )}
       {/* Show additional information, pages, total */}
       {total === 0 && <div className="text-danger">No result</div>}
       {total > 0 && (
-        <div className="text-danger m-3">Total results: {total}</div>
+        <div className="text-danger m-3">
+          Total results: {total} - Displaying 2 {searchResults.length} of{" "}
+          {total}
+        </div>
       )}
     </>
   );
