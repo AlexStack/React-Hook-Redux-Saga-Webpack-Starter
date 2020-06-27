@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import axiosApi from "../../api/axiosApi";
+import packagistApi from "../../api/axiosApi";
 import AxiosAppPresent from "./AxiosAppPresent";
 import RelatedFiles from "../footer/RelatedFiles";
 
@@ -61,7 +61,7 @@ export default class AxiosApp extends Component {
   };
 
   async getApiResult(pageNumber) {
-    const res = await axiosApi
+    const res = await packagistApi
       .get("/search.json", {
         params: {
           q: this.state.keyword,
