@@ -11,9 +11,7 @@ export const history = createBrowserHistory({ basename: "/redux" });
 
 const initialState = {
   //router: null,
-  assignedTasks: [],
-  login: {},
-  myOwnTasks: {},
+  // videos: null,
 };
 
 const persistConfig = {

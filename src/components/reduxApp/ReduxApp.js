@@ -16,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 const { store, persistor } = configureStore(sagaMiddleware, storeHistory);
 sagaMiddleware.run(rootSaga);
 
-import ReduxFunnyVideos from "./ReduxFunnyVideos";
+import ReduxVideos from "./ReduxVideos";
 import ReduxRelatedFiles from "./ReduxRelatedFiles";
 
 export default class ReduxApp extends React.Component {
@@ -29,7 +29,7 @@ export default class ReduxApp extends React.Component {
             <Switch>
               {/* <Route exact path="/basic" component={BasicApp} />
             <Route path="/axios" component={AxiosApp} /> */}
-              <Route component={ReduxFunnyVideos} />
+              <Route component={ReduxVideos} />
             </Switch>
 
             <ReduxRelatedFiles />

@@ -40,8 +40,7 @@ const AxiosAppResults = ({
       {total === 0 && <div className="text-danger">No result</div>}
       {total > 0 && (
         <div className="text-danger m-3">
-          Total results: {total} - Displaying 2 {searchResults.length} of{" "}
-          {total}
+          Total results: {total} - Displaying {searchResults.length} of {total}
         </div>
       )}
     </>

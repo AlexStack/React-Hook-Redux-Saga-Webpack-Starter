@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import packagistApi from "../../api/axiosApi";
+import packagistApi from "../../constants/axiosApi";
 import AxiosAppPresent from "./AxiosAppPresent";
 import RelatedFiles from "../footer/RelatedFiles";
 

@@ -3,10 +3,10 @@
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 
-import allPageReducers from "./allPageReducers";
+import videoReducers from "./videoReducers";
 
-export default storeHistory =>
+export default (storeHistory) =>
   combineReducers({
     router: connectRouter(storeHistory),
-    pages: allPageReducers
+    videos: videoReducers,
   });
