@@ -46,7 +46,7 @@ const HeaderPresent = () => {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/redux"
+                to="/redux/SearchVideos"
                 className="nav-link"
                 onClick={() => hideNavbar("")}
               >

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
   return (
@@ -17,14 +18,13 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
 
       {wasLiked ? (
         <>
-          <button
+          <Link
             className="btn btn-sm btn-info mr-2"
             name="view-liked-videos"
-            data-index={index}
-            onClick={handleFieldChange}
+            to="/LikedVideos"
           >
             <i className="fas fa-video mr-1"></i>All Liked Videos
-          </button>
+          </Link>
 
           <button
             className="btn btn-sm btn-success"

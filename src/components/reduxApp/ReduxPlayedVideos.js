@@ -2,13 +2,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
-
 import allActions from "../../reduxStores/actions/allActions";
 import VideoSearchForm from "./videoSearchForm";
 import VideoSearchResults from "./videoSearchResults";
 
-class ReduxVideos extends Component {
+class ReduxPlayedVideos extends Component {
   constructor(props) {
     super(props);
 
@@ -27,8 +25,7 @@ class ReduxVideos extends Component {
   }
 
   componentDidMount() {
-    const videoType = this.props.match.params.videoType;
-    console.log("componentDidMount", this.state, videoType);
+    console.log("componentDidMount", this.state);
     // this.props.dispatch(allActions.listItemRequest(this.state.keyword));
   }
 
@@ -42,7 +39,7 @@ class ReduxVideos extends Component {
         keyword: event.target.value,
       });
     } else if (event.target.name == "playVideo") {
-      const item = this.props.videos.allItems[
+      const item = this.props.videos.viewedItems[
         event.target.getAttribute("data-index")
       ];
       this.setState({
@@ -52,13 +49,13 @@ class ReduxVideos extends Component {
     } else if (event.target.name == "like") {
       this.props.dispatch(
         allActions.likeItemRequest(
-          this.props.videos.allItems[event.target.getAttribute("data-index")]
+          this.props.videos.viewedItems[event.target.getAttribute("data-index")]
         )
       );
     } else if (event.target.name == "unlike") {
       this.props.dispatch(
         allActions.unlikeItemRequest(
-          this.props.videos.allItems[event.target.getAttribute("data-index")]
+          this.props.videos.viewedItems[event.target.getAttribute("data-index")]
         )
       );
     } else if (event.target.name == "perPage") {
@@ -100,7 +97,7 @@ class ReduxVideos extends Component {
 
         <VideoSearchResults
           total={this.state.total}
-          searchResults={this.props.videos.allItems}
+          searchResults={this.props.videos.viewedItems}
           likedItems={this.props.videos.likedItems}
           handleFieldChange={this.handleFieldChange}
           loading={this.state.loading}
@@ -116,8 +113,8 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-ReduxVideos.propTypes = {
+ReduxPlayedVideos.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(ReduxVideos);
+export default connect(mapStateToProps, null)(ReduxPlayedVideos);

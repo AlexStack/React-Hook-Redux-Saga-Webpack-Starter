@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { NavLink, Link } from "react-router-dom";
 
 const VideoSearchForm = ({
   keyword,
@@ -9,58 +10,99 @@ const VideoSearchForm = ({
   handleSearchSubmit,
   loading,
 }) => {
+  const lastPath = document.location.pathname.split("/").slice(-1)[0];
+  console.log("lastPath", lastPath);
   return (
     <div className="mt-1 mb-1 pt-5 pb-5 pl-4 text-dark">
-      <div className="text-primary mb-3">
-        <h2>Redux Video search example!</h2>
-        <div className="text-secondary">
-          Redux Video search example: An video search and like APP using
-          react-redux-saga API search
-        </div>
-      </div>
-
-      <form onSubmit={handleSearchSubmit}>
-        <div className="text-success">
-          <div className="input-group">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-default">
-                Keyword
-              </span>
-            </div>
-            <input
-              type="text"
-              name="keyword"
-              className="form-control text-success"
-              aria-label="Default"
-              aria-describedby="inputGroup-sizing-default"
-              value={keyword}
-              onChange={handleFieldChange}
-            />
-            <div className="input-group-append">
-              <select
-                onChange={handleFieldChange}
-                name="perPage"
-                className="form-control text-secondary"
-              >
-                <option value="5">Display Number</option>
-                <option value="5">5 results per page</option>
-                <option value="10">10 results per page</option>
-                <option value="20">20 results per page</option>
-                <option value="50">50 results per page</option>
-              </select>
-            </div>
-            <div className="input-group-append">
-              <button
-                className="btn btn-success"
-                type="submit"
-                disabled={loading && searchResults.length == 0}
-              >
-                Search
-              </button>
+      {lastPath == "SearchVideos" ? (
+        <form onSubmit={handleSearchSubmit}>
+          <div className="text-primary mb-3">
+            <h2>Redux Video search example!</h2>
+            <div className="text-secondary">
+              Redux Video search example: An video search and like APP using
+              react-redux-saga API search
             </div>
           </div>
+          <div className="text-success">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span
+                  className="input-group-text"
+                  id="inputGroup-sizing-default"
+                >
+                  Keyword
+                </span>
+              </div>
+              <input
+                type="text"
+                name="keyword"
+                className="form-control text-success"
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                value={keyword}
+                onChange={handleFieldChange}
+              />
+              {/* <div className="input-group-append">
+                <select
+                  onChange={handleFieldChange}
+                  name="perPage"
+                  className="form-control text-secondary"
+                >
+                  <option value="5">Display Number</option>
+                  <option value="5">5 results per page</option>
+                  <option value="10">10 results per page</option>
+                  <option value="20">20 results per page</option>
+                  <option value="50">50 results per page</option>
+                </select>
+              </div> */}
+              <div className="input-group-append">
+                <button
+                  className="btn btn-success"
+                  type="submit"
+                  disabled={loading && searchResults.length == 0}
+                >
+                  <i className="fas fa-search mr-1"></i>Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      ) : (
+        <div className="text-info mb-3">
+          <h2>Redux User Dashboard Example</h2>
+          <div className="text-secondary">
+            This is the user dashboard example
+          </div>
         </div>
-      </form>
+      )}
+
+      <div className="text-right mt-1 redux-buttons">
+        {lastPath != "SearchVideos" && (
+          <NavLink
+            className="btn btn-sm btn-success ml-2"
+            name="view-liked-videos"
+            to="/SearchVideos"
+          >
+            <i className="fas fa-search mr-1"></i>Search Videos
+          </NavLink>
+        )}
+
+        <NavLink
+          className="btn btn-sm btn-info ml-2"
+          name="view-liked-videos"
+          to="/LikedVideos"
+        >
+          <i className="fas fa-thumbs-up mr-1"></i>My Liked Videos
+        </NavLink>
+
+        <NavLink
+          className="btn btn-sm btn-secondary ml-2"
+          name="view-played-videos"
+          to="/PlayedVideos"
+        >
+          <i className="fas fa-video mr-1"></i>Recently Played Videos
+        </NavLink>
+      </div>
 
       {loading && searchResults.length == 0 && (
         <div className="text-center text-success">

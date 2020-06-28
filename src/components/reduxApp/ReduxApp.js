@@ -17,6 +17,8 @@ const { store, persistor } = configureStore(sagaMiddleware, storeHistory);
 sagaMiddleware.run(rootSaga);
 
 import ReduxVideos from "./ReduxVideos";
+import ReduxLikedVideos from "./ReduxLikedVideos";
+import ReduxPlayedVideos from "./ReduxPlayedVideos";
 import ReduxRelatedFiles from "./ReduxRelatedFiles";
 
 export default class ReduxApp extends React.Component {
@@ -27,8 +29,10 @@ export default class ReduxApp extends React.Component {
           <ConnectedRouter history={storeHistory}>
             {/* <HeaderPresent /> */}
             <Switch>
-              {/* <Route exact path="/basic" component={BasicApp} />
-            <Route path="/axios" component={AxiosApp} /> */}
+              <Route path="/PlayedVideos" component={ReduxPlayedVideos} />
+              <Route path="/LikedVideos" component={ReduxLikedVideos} />
+              <Route path="/SearchVideos" component={ReduxVideos} />
+
               <Route component={ReduxVideos} />
             </Switch>
 

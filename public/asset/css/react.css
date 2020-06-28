@@ -2,3 +2,7 @@ body {
   background-color: azure;
   color: rgb(20, 20, 20);
 }
+
+.redux-buttons a.active {
+  color: yellow !important;
+}

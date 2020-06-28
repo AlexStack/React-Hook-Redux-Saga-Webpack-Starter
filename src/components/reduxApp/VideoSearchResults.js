@@ -15,9 +15,10 @@ const VideoSearchResults = ({
     <div className="row">
       {searchResults.length > 0 &&
         searchResults.map((item, index) => {
-          const wasLiked = likedItems.find(
+          const likedItem = likedItems.find(
             (obj) => obj.id.videoId == item.id.videoId
           );
+          const wasLiked = likedItem ? true : false;
           return (
             <div className="col-md-6 mb-2" key={index}>
               {playVideoId !== item.id.videoId ? (
