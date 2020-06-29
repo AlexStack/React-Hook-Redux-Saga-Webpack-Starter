@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink, Link } from "react-router-dom";
-import { REDUXPATH, lastPath } from "../../constants/config";
+import { REDUXPATH, lastPath, myLog } from "../../constants/config";
 
 const VideoSearchForm = ({
   keyword,
@@ -11,12 +11,15 @@ const VideoSearchForm = ({
   handleSearchSubmit,
   loading,
 }) => {
+  const showSearchForm =
+    lastPath() == REDUXPATH.SearchVideos || lastPath() == "/" ? true : false;
+  // myLog(lastPath(), showSearchForm);
   return (
     <div className="mt-1 mb-1 pt-5 pb-5 pl-4 text-dark">
-      {lastPath() == REDUXPATH.SearchVideos ? (
+      {showSearchForm ? (
         <form onSubmit={handleSearchSubmit}>
           <div className="text-primary mb-3">
-            <h2>Redux Video search example!</h2>
+            <h2>Redux Video Search Example!</h2>
             <div className="text-secondary">
               Redux Video search example: An video search and like APP using
               react-redux-saga API search
@@ -77,7 +80,7 @@ const VideoSearchForm = ({
 
       <div className="row mt-1">
         <div className="col-md text-truncate keyword-history-buttons">
-          {lastPath() == REDUXPATH.SearchVideos &&
+          {showSearchForm &&
             keywordHistory.length > 0 &&
             keywordHistory.map((k, index) => {
               if (k != keyword) {
@@ -97,7 +100,7 @@ const VideoSearchForm = ({
         </div>
 
         <div className="col-md-auto text-right redux-buttons">
-          {lastPath() != REDUXPATH.SearchVideos && (
+          {!showSearchForm && (
             <NavLink
               className="btn btn-sm btn-success ml-2 mb-1"
               name="view-liked-videos"

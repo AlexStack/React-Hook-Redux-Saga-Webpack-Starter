@@ -18,7 +18,7 @@ export default class ReactApp extends React.Component {
             <Route exact path={REACTPATH.Basic} component={BasicApp} />
             <Route path={REACTPATH.Axios} component={AxiosApp} />
             <Route path={REACTPATH.Redux} component={ReduxApp} />
-            <Route component={AxiosApp} />
+            <Route component={ReduxApp} />
           </Switch>
         </div>
         <FooterPresent />
