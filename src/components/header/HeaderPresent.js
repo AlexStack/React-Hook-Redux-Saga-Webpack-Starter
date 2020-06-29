@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import { REACTPATH, REDUXPATH } from "../../constants/config";
 
 const hideNavbar = (action) => {
   document.getElementById("collapsibleNavbar").classList.remove("show");
@@ -28,7 +29,7 @@ const HeaderPresent = () => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink
-                to="/basic"
+                to={REACTPATH.Basic}
                 className="nav-link"
                 onClick={() => hideNavbar("")}
               >
@@ -37,7 +38,7 @@ const HeaderPresent = () => {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/axios"
+                to={REACTPATH.Axios}
                 className="nav-link"
                 onClick={() => hideNavbar("")}
               >
@@ -46,7 +47,7 @@ const HeaderPresent = () => {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/redux/SearchVideos"
+                to={REACTPATH.Redux + REDUXPATH.SearchVideos}
                 className="nav-link"
                 onClick={() => hideNavbar("")}
               >

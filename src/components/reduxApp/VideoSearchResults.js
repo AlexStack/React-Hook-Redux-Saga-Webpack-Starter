@@ -60,8 +60,9 @@ const VideoSearchResults = ({
         </div>
       )}
       {total > 0 && (
-        <div className="col-md-12 text-info m-3">
-          <i className="fas fa-photo-video mr-2"></i>Total {total} Videos
+        <div className="col-md-12 text-success m-3">
+          <i className="fas fa-photo-video mr-2"></i>Displaying{" "}
+          {searchResults.length} of {total} Videos
         </div>
       )}
     </div>

@@ -5,8 +5,8 @@ import BasicApp from "./components/basicApp/BasicApp";
 import AxiosApp from "./components/axiosApp/AxiosApp";
 import HeaderPresent from "./components/header/HeaderPresent";
 import FooterPresent from "./components/footer/FooterPresent";
-
 import ReduxApp from "./components/reduxApp/ReduxApp";
+import { REACTPATH } from "./constants/config";
 
 export default class ReactApp extends React.Component {
   render() {
@@ -15,9 +15,9 @@ export default class ReactApp extends React.Component {
         <HeaderPresent />
         <div className="container-fluid top-container react-js-main">
           <Switch>
-            <Route exact path="/basic" component={BasicApp} />
-            <Route path="/axios" component={AxiosApp} />
-            <Route path="/redux" component={ReduxApp} />
+            <Route exact path={REACTPATH.Basic} component={BasicApp} />
+            <Route path={REACTPATH.Axios} component={AxiosApp} />
+            <Route path={REACTPATH.Redux} component={ReduxApp} />
             <Route component={AxiosApp} />
           </Switch>
         </div>

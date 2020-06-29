@@ -7,13 +7,13 @@ import { routerMiddleware } from "connected-react-router";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-export const history = createBrowserHistory({ basename: "/point" });
+export const history = createBrowserHistory({ basename: "/redux" });
 
 const initialState = {
   //router: null,
   assignedTasks: [],
   login: {},
-  myOwnTasks: {}
+  myOwnTasks: {},
 };
 
 const persistConfig = {
@@ -22,7 +22,7 @@ const persistConfig = {
   /**
    * Blacklist state that we do not need/want to persist
    */
-  blacklist: ["router"]
+  blacklist: ["router"],
 };
 
 const configureStore = (sagaMiddleware, storeHistory) => {
