@@ -43,10 +43,18 @@ const listItems = (state = INITIAL_STATE, action) => {
 };
 
 const showLoading = (state = INITIAL_STATE, action) => {
+  const allItems = action.nextPageToken ? state.allItems : [];
+  const totalResults = action.nextPageToken
+    ? state.extraInfo.totalResults
+    : null;
   return {
     ...state,
     ...{
-      extraInfo: { loading: true, totalResults: state.extraInfo.totalResults },
+      extraInfo: {
+        loading: action.loading,
+        totalResults: totalResults,
+      },
+      allItems: allItems,
     },
   };
 };

@@ -40,7 +40,7 @@ const VideoSearchResults = ({
           );
         })}
 
-      {total > 0 && total > searchResults.length && (
+      {total > 0 && total > searchResults.length && searchResults.length > 0 && (
         <div className="col-md text-center">
           <button
             className="btn btn-success m-2"

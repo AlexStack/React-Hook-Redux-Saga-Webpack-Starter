@@ -27,7 +27,7 @@ const { Types, Creators } = createActions({
   setFilterKeySuccess: ["value"],
   setFilterKeyFailure: ["error"],
 
-  showLoading: ["loading"],
+  showLoading: ["loading", "nextPageToken"],
 });
 
 export const actionTypes = Types;

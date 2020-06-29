@@ -127,8 +127,8 @@ const VideoSearchForm = ({
         </div>
 
         {loading && searchResults.length == 0 && (
-          <div className="text-center text-success">
-            <i className="fas fa-spinner fa-spin mr-1"></i>Loading...
+          <div className="col-md text-center text-success m-3">
+            <i className="fas fa-spinner fa-spin mr-1"></i>Loading ......
           </div>
         )}
       </div>

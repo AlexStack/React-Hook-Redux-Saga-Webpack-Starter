@@ -5,7 +5,7 @@ import allActions, { actionTypes } from "../reduxStores/actions/allActions";
 import { myLog } from "../constants/config";
 
 function* listItem(action) {
-  yield put(allActions.showLoading());
+  yield put(allActions.showLoading(true, action.nextPageToken));
 
   try {
     const json = yield call(
