@@ -8,7 +8,7 @@ function* listItem(action) {
   try {
     const json = yield call(sagaApi.listItem, action.keyword);
     console.log("listItem-mylog1", action.type, json);
-    yield put(allActions.listItemSuccess(json.data));
+    yield put(allActions.listItemSuccess(json.data, action.keyword));
   } catch (e) {
     yield put(allActions.listItemFailure(e.message));
   }

@@ -25,6 +25,7 @@ class ReduxPlayedVideos extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     console.log("componentDidMount", this.state);
     // this.props.dispatch(allActions.listItemRequest(this.state.keyword));
   }
@@ -88,15 +89,15 @@ class ReduxPlayedVideos extends Component {
       <div className="text-center">
         <VideoSearchForm
           keyword={this.state.keyword}
-          total={this.state.total}
-          searchResults={this.props.videos.allItems}
+          keywordHistory={this.props.videos.keywords}
+          searchResults={this.props.videos.viewedItems}
           handleFieldChange={this.handleFieldChange}
           handleSearchSubmit={this.handleSearchSubmit}
           loading={this.state.loading}
         />
 
         <VideoSearchResults
-          total={this.state.total}
+          total={this.props.videos.viewedItems.length}
           searchResults={this.props.videos.viewedItems}
           likedItems={this.props.videos.likedItems}
           handleFieldChange={this.handleFieldChange}

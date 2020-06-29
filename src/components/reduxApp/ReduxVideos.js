@@ -27,8 +27,12 @@ class ReduxVideos extends Component {
   }
 
   componentDidMount() {
-    const videoType = this.props.match.params.videoType;
-    console.log("componentDidMount", this.state, videoType);
+    if (this.props.videos.keywords.length > 0) {
+      this.setState({
+        keyword: this.props.videos.keywords[0],
+      });
+    }
+    console.log("componentDidMount", this.state);
     // this.props.dispatch(allActions.listItemRequest(this.state.keyword));
   }
 
@@ -39,7 +43,7 @@ class ReduxVideos extends Component {
   handleFieldChange = (event) => {
     if (event.target.name == "keyword") {
       this.setState({
-        keyword: event.target.value,
+        keyword: event.target.value.trim(),
       });
     } else if (event.target.name == "playVideo") {
       const item = this.props.videos.allItems[
@@ -61,10 +65,14 @@ class ReduxVideos extends Component {
           this.props.videos.allItems[event.target.getAttribute("data-index")]
         )
       );
-    } else if (event.target.name == "perPage") {
+    } else if (event.target.name == "keywordHistory") {
       this.setState({
-        perPage: event.target.value,
+        keyword: event.target.value,
+        searchResults: [],
+        total: null,
+        loading: true,
       });
+      this.props.dispatch(allActions.listItemRequest(event.target.value));
     } else if (event.target.name == "loadMore") {
       const pageNumber = this.state.page + 1;
       this.setState({
@@ -91,7 +99,7 @@ class ReduxVideos extends Component {
       <div className="text-center">
         <VideoSearchForm
           keyword={this.state.keyword}
-          total={this.state.total}
+          keywordHistory={this.props.videos.keywords}
           searchResults={this.props.videos.allItems}
           handleFieldChange={this.handleFieldChange}
           handleSearchSubmit={this.handleSearchSubmit}

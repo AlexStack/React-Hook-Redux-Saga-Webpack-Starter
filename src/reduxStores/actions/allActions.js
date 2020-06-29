@@ -4,7 +4,7 @@ import { createActions } from "reduxsauce";
 
 const { Types, Creators } = createActions({
   listItemRequest: ["keyword"],
-  listItemSuccess: ["allData"],
+  listItemSuccess: ["allData", "keyword"],
   listItemFailure: ["error"],
 
   viewItemRequest: ["item"],

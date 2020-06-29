@@ -7,7 +7,7 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
     <div>
       {!isPlaying && (
         <button
-          className="btn btn-sm btn-primary mr-2"
+          className="btn btn-sm btn-primary mr-2 mb-1"
           name="playVideo"
           data-index={index}
           onClick={handleFieldChange}
@@ -19,7 +19,7 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
       {wasLiked ? (
         <>
           <Link
-            className="btn btn-sm btn-info mr-2"
+            className="btn btn-sm btn-info mr-2 mb-1"
             name="view-liked-videos"
             to="/LikedVideos"
           >
@@ -27,7 +27,7 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
           </Link>
 
           <button
-            className="btn btn-sm btn-success"
+            className="btn btn-sm btn-success mb-1"
             name="unlike"
             data-index={index}
             onClick={handleFieldChange}
@@ -37,7 +37,7 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
         </>
       ) : (
         <button
-          className="btn btn-sm btn-secondary"
+          className="btn btn-sm btn-secondary mb-1"
           name="like"
           data-index={index}
           onClick={handleFieldChange}

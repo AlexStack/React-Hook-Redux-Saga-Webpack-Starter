@@ -4,11 +4,11 @@ const listItem = (keyword) => {
   return youtubeApi.get(`/search`, {
     params: {
       part: "snippet",
-      order: "viewCount",
+      order: "rating", // date, viewCount
       q: keyword,
       type: "video",
       videoDefinition: "high",
-      maxResults: 16,
+      maxResults: 20,
     },
   });
 };

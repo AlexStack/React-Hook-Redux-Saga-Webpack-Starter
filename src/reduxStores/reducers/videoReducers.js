@@ -1,12 +1,13 @@
 import { createReducer } from "reduxsauce";
 import { actionTypes } from "../actions/allActions";
+import { REDUXPATH } from "../../constants/config";
 
 // the initial state of this reducer
 export const INITIAL_STATE = {
   allItems: [],
   likedItems: [],
   viewedItems: [],
-  keywords: [],
+  keywords: ["Just for laugh", "Cat", "Dog", "Mac Pro", "SpaceX", "Covid-19"],
   // errorMsg: null,
   // formStatus: null, // Submitting, Success, Failed
   // applyTask: null,
@@ -14,15 +15,23 @@ export const INITIAL_STATE = {
 };
 
 const listItems = (state = INITIAL_STATE, action) => {
-  return { ...state, allItems: action.allData.items };
+  return {
+    ...state,
+    ...{
+      allItems: action.allData.items,
+      keywords: [
+        action.keyword,
+        ...state.keywords.filter((t) => t !== action.keyword),
+      ],
+    },
+  };
 };
 
 const likeItem = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    ...{ likedItems: [...state.likedItems, action.item] },
+    ...{ likedItems: [action.item, ...state.likedItems] },
   };
-  // return { ...state, likedItems: action.item };
 };
 
 const unlikeItem = (state = INITIAL_STATE, action) => {
@@ -36,9 +45,22 @@ const unlikeItem = (state = INITIAL_STATE, action) => {
 };
 
 const viewItem = (state = INITIAL_STATE, action) => {
+  const LastPath = document.location.pathname.split("/").slice(-1)[0];
+  if (LastPath == REDUXPATH.PlayedVideos) {
+    return state; // nothing should change when you are on the PlayedVideos page
+  }
+
+  // remove the duplicate videos and put the latest played video on the top
   return {
     ...state,
-    ...{ viewedItems: [...state.viewedItems, action.item] },
+    ...{
+      viewedItems: [
+        action.item,
+        ...state.viewedItems.filter(
+          (item) => item.id.videoId !== action.item.id.videoId
+        ),
+      ],
+    },
   };
 };
 
