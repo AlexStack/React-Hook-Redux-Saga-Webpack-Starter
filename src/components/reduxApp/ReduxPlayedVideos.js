@@ -26,12 +26,11 @@ class ReduxPlayedVideos extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    console.log("componentDidMount", this.state);
-    // this.props.dispatch(allActions.listItemRequest(this.state.keyword));
+    // console.log("componentDidMount", this.state);
   }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate", this.state);
+    // console.log("componentDidUpdate", this.state);
   }
 
   handleFieldChange = (event) => {
@@ -63,15 +62,8 @@ class ReduxPlayedVideos extends Component {
       this.setState({
         perPage: event.target.value,
       });
-    } else if (event.target.name == "loadMore") {
-      const pageNumber = this.state.page + 1;
-      this.setState({
-        loading: true,
-      });
-      this.getApiResult(pageNumber);
     }
-
-    console.log(event.target.getAttribute("data-index"));
+    // console.log(event.target.getAttribute("data-index"));
   };
 
   handleSearchSubmit = (event) => {

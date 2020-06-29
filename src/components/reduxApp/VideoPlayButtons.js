@@ -1,8 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { REDUXPATH, lastPath } from "../../constants/config";
 
-const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
+const VideoPlayButtons = ({
+  isPlaying,
+  wasLiked,
+  handleFieldChange,
+  index,
+}) => {
   return (
     <div>
       {!isPlaying && (
@@ -18,13 +24,15 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
 
       {wasLiked ? (
         <>
-          <Link
-            className="btn btn-sm btn-info mr-2 mb-1"
-            name="view-liked-videos"
-            to="/LikedVideos"
-          >
-            <i className="fas fa-video mr-1"></i>All Liked Videos
-          </Link>
+          {lastPath() != REDUXPATH.LikedVideos && (
+            <Link
+              className="btn btn-sm btn-info mr-2 mb-1"
+              name="view-liked-videos"
+              to={REDUXPATH.LikedVideos}
+            >
+              <i className="fas fa-video mr-1"></i>All Liked Videos
+            </Link>
+          )}
 
           <button
             className="btn btn-sm btn-success mb-1"
@@ -49,11 +57,11 @@ const VideoButtons = ({ isPlaying, wasLiked, handleFieldChange, index }) => {
   );
 };
 
-VideoButtons.propTypes = {
+VideoPlayButtons.propTypes = {
   isPlaying: PropTypes.bool,
   wasLiked: PropTypes.bool,
   handleFieldChange: PropTypes.func,
   index: PropTypes.number,
 };
 
-export default VideoButtons;
+export default VideoPlayButtons;

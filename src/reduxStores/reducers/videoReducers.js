@@ -1,6 +1,6 @@
 import { createReducer } from "reduxsauce";
 import { actionTypes } from "../actions/allActions";
-import { REDUXPATH } from "../../constants/config";
+import { REDUXPATH, lastPath } from "../../constants/config";
 
 // the initial state of this reducer
 export const INITIAL_STATE = {
@@ -89,8 +89,7 @@ const unlikeItem = (state = INITIAL_STATE, action) => {
 };
 
 const viewItem = (state = INITIAL_STATE, action) => {
-  const LastPath = document.location.pathname.split("/").slice(-1)[0];
-  if (LastPath == REDUXPATH.PlayedVideos) {
+  if (lastPath() == REDUXPATH.PlayedVideos) {
     return state; // nothing should change when you are on the PlayedVideos page
   }
 

@@ -2,23 +2,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
 
 import allActions from "../../reduxStores/actions/allActions";
 import VideoSearchForm from "./videoSearchForm";
 import VideoSearchResults from "./videoSearchResults";
 
-class ReduxVideos extends Component {
+class ReduxAllVideos extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       keyword: "funny",
       searchResults: [],
-      etag: null,
-      perPage: 5,
       total: null,
-      loading: false,
       playVideoId: null,
     };
 
@@ -37,10 +33,6 @@ class ReduxVideos extends Component {
 
   componentDidUpdate() {
     console.log("componentDidUpdate", this.state);
-    console.log(
-      "after start search componentDidUpdate",
-      this.props.videos.extraInfo.etag
-    );
   }
 
   handleFieldChange = (event) => {
@@ -73,14 +65,9 @@ class ReduxVideos extends Component {
         keyword: event.target.value,
         searchResults: [],
         total: null,
-        loading: true,
       });
       this.startSearch(event.target.value);
     } else if (event.target.name == "loadMore") {
-      this.setState({
-        loading: true,
-      });
-
       this.startSearch(
         this.state.keyword,
         this.props.videos.extraInfo.nextPageToken
@@ -95,16 +82,13 @@ class ReduxVideos extends Component {
     this.setState({
       searchResults: [],
       total: null,
-      loading: true,
     });
 
     this.startSearch(this.state.keyword);
   };
 
   startSearch = (keyword, nextPageToken) => {
-    console.log("before start search", this.props.videos.extraInfo.etag);
     this.props.dispatch(allActions.listItemRequest(keyword, nextPageToken));
-    console.log("after start search", this.props.videos.extraInfo.etag);
   };
 
   render() {
@@ -116,7 +100,7 @@ class ReduxVideos extends Component {
           searchResults={this.props.videos.allItems}
           handleFieldChange={this.handleFieldChange}
           handleSearchSubmit={this.handleSearchSubmit}
-          loading={this.state.loading}
+          loading={this.props.videos.extraInfo.loading}
         />
 
         {this.props.videos.extraInfo.errorMsg && (
@@ -143,8 +127,8 @@ const mapStateToProps = (reduxState) => {
   return reduxState;
 };
 
-ReduxVideos.propTypes = {
+ReduxAllVideos.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(ReduxVideos);
+export default connect(mapStateToProps, null)(ReduxAllVideos);

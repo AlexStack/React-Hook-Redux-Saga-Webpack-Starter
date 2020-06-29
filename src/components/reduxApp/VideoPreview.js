@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import VideoButtons from "./videoButtons";
+import VideoPlayButtons from "./VideoPlayButtons";
 
 const VideoPreview = ({ item, handleFieldChange, index, wasLiked }) => {
   return (
@@ -16,25 +16,15 @@ const VideoPreview = ({ item, handleFieldChange, index, wasLiked }) => {
 
       <div className="card-body p-2">
         <h5 className="card-title">
-          <span className="badge badge-secondary">{index + 1}</span>{" "}
+          <span className="badge badge-secondary mr-1">{index + 1}</span>
           {item.snippet.title}
         </h5>
-        <VideoButtons
+        <VideoPlayButtons
           isPlaying={false}
           wasLiked={wasLiked}
           handleFieldChange={handleFieldChange}
           index={index}
         />
-        {/* <p className="card-text">{item.snippet.description}</p> */}
-        {/* <button
-          className="btn btn-primary"
-          name="playVideo"
-          id={item.id.videoId}
-          data-index={index}
-          onClick={handleFieldChange}
-        >
-          <i className="fas fa-play mr-1"></i>Play Video
-        </button> */}
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ const VideoSearchResults = ({
             onClick={handleFieldChange}
             disabled={loading}
           >
-            Load More Data
+            <i className="fas fa-download mr-1"></i>Load More Data
             {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
           </button>
         </div>

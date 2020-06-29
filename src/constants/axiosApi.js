@@ -22,6 +22,7 @@ export const youtubeApi = axios.create({
   timeout: 3000,
   responseType: "json",
   params: {
+    // replace below key to your own google-youtube-api-key for more quotas
     key: "AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw",
     // key: "AIzaSyCSUjqlOe2fK8_2Iw8IXTy9RZ8XOGQ3Mvg",
     maxResults: 10,
@@ -47,8 +48,5 @@ export const backendApi = axios.create({
     Authorization: "Client Id change-here-if-authorization-needed",
   },
 });
-
-// details: https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw&part=snippet,statistics&fields=items
-// search: https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&q=skateboarding%20dog&type=video&videoDefinition=high&key=AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw
 
 export default packagistApi;

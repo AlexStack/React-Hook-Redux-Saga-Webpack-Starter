@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink, Link } from "react-router-dom";
-import { REDUXPATH } from "../../constants/config";
+import { REDUXPATH, lastPath } from "../../constants/config";
 
 const VideoSearchForm = ({
   keyword,
@@ -11,11 +11,9 @@ const VideoSearchForm = ({
   handleSearchSubmit,
   loading,
 }) => {
-  const lastPath = document.location.pathname.split("/").slice(-1)[0];
-  console.log("lastPath", lastPath);
   return (
     <div className="mt-1 mb-1 pt-5 pb-5 pl-4 text-dark">
-      {lastPath == REDUXPATH.SearchVideos ? (
+      {lastPath() == REDUXPATH.SearchVideos ? (
         <form onSubmit={handleSearchSubmit}>
           <div className="text-primary mb-3">
             <h2>Redux Video search example!</h2>
@@ -79,7 +77,7 @@ const VideoSearchForm = ({
 
       <div className="row mt-1">
         <div className="col-md text-truncate keyword-history-buttons">
-          {lastPath == REDUXPATH.SearchVideos &&
+          {lastPath() == REDUXPATH.SearchVideos &&
             keywordHistory.length > 0 &&
             keywordHistory.map((k, index) => {
               if (k != keyword) {
@@ -99,11 +97,11 @@ const VideoSearchForm = ({
         </div>
 
         <div className="col-md-auto text-right redux-buttons">
-          {lastPath != REDUXPATH.SearchVideos && (
+          {lastPath() != REDUXPATH.SearchVideos && (
             <NavLink
               className="btn btn-sm btn-success ml-2 mb-1"
               name="view-liked-videos"
-              to="/SearchVideos"
+              to={REDUXPATH.SearchVideos}
             >
               <i className="fas fa-search mr-1"></i>Search Videos
             </NavLink>
@@ -112,7 +110,7 @@ const VideoSearchForm = ({
           <NavLink
             className="btn btn-sm btn-info ml-2 mb-1"
             name="view-liked-videos"
-            to="/LikedVideos"
+            to={REDUXPATH.LikedVideos}
           >
             <i className="fas fa-thumbs-up mr-1"></i>My Liked Videos
           </NavLink>
@@ -120,14 +118,14 @@ const VideoSearchForm = ({
           <NavLink
             className="btn btn-sm btn-secondary ml-2 mb-1"
             name="view-played-videos"
-            to="/PlayedVideos"
+            to={REDUXPATH.PlayedVideos}
           >
             <i className="fas fa-video mr-1"></i>Recently Played Videos
           </NavLink>
         </div>
 
         {loading && searchResults.length == 0 && (
-          <div className="col-md text-center text-success m-3">
+          <div className="col-md-12 text-center text-success m-3">
             <i className="fas fa-spinner fa-spin mr-1"></i>Loading ......
           </div>
         )}
