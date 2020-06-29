@@ -22,9 +22,9 @@ export const youtubeApi = axios.create({
   timeout: 3000,
   responseType: "json",
   params: {
-    // key: "AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw",
-    key: "AIzaSyCSUjqlOe2fK8_2Iw8IXTy9RZ8XOGQ3Mvg",
-    maxResults: 20,
+    key: "AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw",
+    // key: "AIzaSyCSUjqlOe2fK8_2Iw8IXTy9RZ8XOGQ3Mvg",
+    maxResults: 10,
   },
   headers: {
     "Content-Type": "application/json",

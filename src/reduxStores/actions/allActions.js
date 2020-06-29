@@ -3,8 +3,8 @@ import { createActions } from "reduxsauce";
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  listItemRequest: ["keyword"],
-  listItemSuccess: ["allData", "keyword"],
+  listItemRequest: ["keyword", "nextPageToken"],
+  listItemSuccess: ["allData", "keyword", "nextPageToken"],
   listItemFailure: ["error"],
 
   viewItemRequest: ["item"],
@@ -26,6 +26,8 @@ const { Types, Creators } = createActions({
   setFilterKeyRequest: ["value"],
   setFilterKeySuccess: ["value"],
   setFilterKeyFailure: ["error"],
+
+  showLoading: ["loading"],
 });
 
 export const actionTypes = Types;

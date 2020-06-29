@@ -8,21 +8,57 @@ export const INITIAL_STATE = {
   likedItems: [],
   viewedItems: [],
   keywords: ["Just for laugh", "Cat", "Dog", "Mac Pro", "SpaceX", "Covid-19"],
-  // errorMsg: null,
-  // formStatus: null, // Submitting, Success, Failed
-  // applyTask: null,
-  // filterKey: "all",
+  extraInfo: {
+    etag: null,
+    loading: false,
+    nextPageToken: null,
+    resultsPerPage: 5,
+    totalResults: null,
+    errorMsg: null,
+  },
 };
 
 const listItems = (state = INITIAL_STATE, action) => {
+  const allItems = action.nextPageToken
+    ? [...state.allItems, ...action.allData.items]
+    : action.allData.items;
   return {
     ...state,
     ...{
-      allItems: action.allData.items,
+      allItems: allItems,
       keywords: [
         action.keyword,
         ...state.keywords.filter((t) => t !== action.keyword),
       ],
+      extraInfo: {
+        loading: false,
+        nextPageToken: action.allData.nextPageToken,
+        resultsPerPage: action.allData.pageInfo.resultsPerPage,
+        totalResults: action.allData.pageInfo.totalResults,
+        errorMsg: null,
+        etag: action.allData.etag,
+      },
+    },
+  };
+};
+
+const showLoading = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    ...{
+      extraInfo: { loading: true, totalResults: state.extraInfo.totalResults },
+    },
+  };
+};
+
+const listItemFailure = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    ...{
+      extraInfo: {
+        loading: false,
+        errorMsg: "Something wrong with the youtube API response",
+      },
     },
   };
 };
@@ -84,7 +120,7 @@ export const HANDLERS = {
   [actionTypes.UNLIKE_ITEM_SUCCESS]: unlikeItem,
   [actionTypes.DELETE_ITEM_SUCCESS]: deleteItem,
   [actionTypes.SET_FILTER_KEY_SUCCESS]: setFilterKey,
-  // [actionTypes.APPLY_TASK_GROUP_FAILURE]: applyTaskFailure
+  [actionTypes.SHOW_LOADING]: showLoading,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);

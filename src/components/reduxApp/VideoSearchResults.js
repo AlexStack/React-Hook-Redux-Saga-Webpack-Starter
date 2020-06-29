@@ -41,15 +41,17 @@ const VideoSearchResults = ({
         })}
 
       {total > 0 && total > searchResults.length && (
-        <button
-          className="btn btn-success m-2"
-          name="loadMore"
-          onClick={handleFieldChange}
-          disabled={loading}
-        >
-          Load More Data
-          {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
-        </button>
+        <div className="col-md text-center">
+          <button
+            className="btn btn-success m-2"
+            name="loadMore"
+            onClick={handleFieldChange}
+            disabled={loading}
+          >
+            Load More Data
+            {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
+          </button>
+        </div>
       )}
       {/* Show additional information, pages, total */}
       {total === 0 && (

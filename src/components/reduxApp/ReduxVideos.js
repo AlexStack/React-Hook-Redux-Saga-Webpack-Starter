@@ -15,7 +15,7 @@ class ReduxVideos extends Component {
     this.state = {
       keyword: "funny",
       searchResults: [],
-      page: 1,
+      etag: null,
       perPage: 5,
       total: null,
       loading: false,
@@ -33,11 +33,14 @@ class ReduxVideos extends Component {
       });
     }
     console.log("componentDidMount", this.state);
-    // this.props.dispatch(allActions.listItemRequest(this.state.keyword));
   }
 
   componentDidUpdate() {
     console.log("componentDidUpdate", this.state);
+    console.log(
+      "after start search componentDidUpdate",
+      this.props.videos.extraInfo.etag
+    );
   }
 
   handleFieldChange = (event) => {
@@ -72,13 +75,16 @@ class ReduxVideos extends Component {
         total: null,
         loading: true,
       });
-      this.props.dispatch(allActions.listItemRequest(event.target.value));
+      this.startSearch(event.target.value);
     } else if (event.target.name == "loadMore") {
-      const pageNumber = this.state.page + 1;
       this.setState({
         loading: true,
       });
-      this.getApiResult(pageNumber);
+
+      this.startSearch(
+        this.state.keyword,
+        this.props.videos.extraInfo.nextPageToken
+      );
     }
 
     console.log(event.target.getAttribute("data-index"));
@@ -91,7 +97,14 @@ class ReduxVideos extends Component {
       total: null,
       loading: true,
     });
-    this.props.dispatch(allActions.listItemRequest(this.state.keyword));
+
+    this.startSearch(this.state.keyword);
+  };
+
+  startSearch = (keyword, nextPageToken) => {
+    console.log("before start search", this.props.videos.extraInfo.etag);
+    this.props.dispatch(allActions.listItemRequest(keyword, nextPageToken));
+    console.log("after start search", this.props.videos.extraInfo.etag);
   };
 
   render() {
@@ -106,12 +119,18 @@ class ReduxVideos extends Component {
           loading={this.state.loading}
         />
 
+        {this.props.videos.extraInfo.errorMsg && (
+          <div className="text-danger mb-5">
+            {this.props.videos.extraInfo.errorMsg}
+          </div>
+        )}
+
         <VideoSearchResults
-          total={this.state.total}
+          total={this.props.videos.extraInfo.totalResults}
           searchResults={this.props.videos.allItems}
           likedItems={this.props.videos.likedItems}
           handleFieldChange={this.handleFieldChange}
-          loading={this.state.loading}
+          loading={this.props.videos.extraInfo.loading}
           playVideoId={this.state.playVideoId}
         />
       </div>
@@ -119,9 +138,9 @@ class ReduxVideos extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  // console.log("mapStateToProps AllPageContainer", state);
-  return state;
+const mapStateToProps = (reduxState) => {
+  // console.log("mapStateToProps ", reduxState);
+  return reduxState;
 };
 
 ReduxVideos.propTypes = {

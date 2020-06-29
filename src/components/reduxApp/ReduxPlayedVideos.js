@@ -109,9 +109,9 @@ class ReduxPlayedVideos extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  // console.log("mapStateToProps AllPageContainer", state);
-  return state;
+const mapStateToProps = (reduxState) => {
+  // console.log("mapStateToProps ", reduxState);
+  return reduxState;
 };
 
 ReduxPlayedVideos.propTypes = {

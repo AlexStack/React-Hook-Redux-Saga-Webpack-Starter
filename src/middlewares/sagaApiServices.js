@@ -1,6 +1,6 @@
 import { youtubeApi, backendApi } from "../constants/axiosApi";
 
-const listItem = (keyword) => {
+const listItem = (keyword, nextPageToken) => {
   return youtubeApi.get(`/search`, {
     params: {
       part: "snippet",
@@ -8,7 +8,8 @@ const listItem = (keyword) => {
       q: keyword,
       type: "video",
       videoDefinition: "high",
-      maxResults: 20,
+      maxResults: 10,
+      pageToken: nextPageToken,
     },
   });
 };

@@ -5,10 +5,22 @@ import allActions, { actionTypes } from "../reduxStores/actions/allActions";
 import { myLog } from "../constants/config";
 
 function* listItem(action) {
+  yield put(allActions.showLoading());
+
   try {
-    const json = yield call(sagaApi.listItem, action.keyword);
+    const json = yield call(
+      sagaApi.listItem,
+      action.keyword,
+      action.nextPageToken
+    );
     console.log("listItem-mylog1", action.type, json);
-    yield put(allActions.listItemSuccess(json.data, action.keyword));
+    yield put(
+      allActions.listItemSuccess(
+        json.data,
+        action.keyword,
+        action.nextPageToken
+      )
+    );
   } catch (e) {
     yield put(allActions.listItemFailure(e.message));
   }
