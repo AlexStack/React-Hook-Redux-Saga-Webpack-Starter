@@ -49,4 +49,20 @@ export const backendApi = axios.create({
   },
 });
 
+// for websiteApp example
+export const githubContentsApi = axios.create({
+  baseURL:
+    "https://api.github.com/repos/AlexStack/React-Hook-Redux-Saga-Webpack-Starter/contents",
+  timeout: 3000,
+  responseType: "json",
+  params: {
+    per_page: 5,
+  },
+  headers: {
+    "Content-Type": "application/json",
+    // "X-Custom-Header": "AlexStack react starter example",
+    // Authorization: "Client Id change-here-if-authorization-needed",
+  },
+});
+
 export default packagistApi;

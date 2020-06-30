@@ -47,6 +47,16 @@ const HeaderPresent = () => {
             </li>
             <li className="nav-item">
               <NavLink
+                to={REACTPATH.Website}
+                className="nav-link"
+                onClick={() => hideNavbar("")}
+              >
+                Github API
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
                 to={REACTPATH.Redux + REDUXPATH.SearchVideos}
                 className="nav-link"
                 onClick={() => hideNavbar("")}

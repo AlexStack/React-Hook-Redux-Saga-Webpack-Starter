@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BasicApp from "./components/basicApp/BasicApp";
 import AxiosApp from "./components/axiosApp/AxiosApp";
+import WebsiteApp from "./components/WebsiteApp/WebsiteApp";
 import HeaderPresent from "./components/header/HeaderPresent";
 import FooterPresent from "./components/footer/FooterPresent";
 import ReduxApp from "./components/reduxApp/ReduxApp";
@@ -17,6 +18,7 @@ export default class ReactApp extends React.Component {
           <Switch>
             <Route exact path={REACTPATH.Basic} component={BasicApp} />
             <Route path={REACTPATH.Axios} component={AxiosApp} />
+            <Route path={REACTPATH.Website} component={WebsiteApp} />
             <Route path={REACTPATH.Redux} component={ReduxApp} />
             <Route component={ReduxApp} />
           </Switch>
