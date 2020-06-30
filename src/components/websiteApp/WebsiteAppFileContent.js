@@ -8,8 +8,13 @@ const WebsiteAppFileContent = ({
   loading,
 }) => {
   return (
-    <div className="file-content">
-      {fileContent}
+    <div className="text-left file-content">
+      <div
+        className="main-content"
+        dangerouslySetInnerHTML={{
+          __html: fileContent.replace(/(<? *script)/gi, "illegalScript"),
+        }}
+      />
 
       <button
         className="btn btn-success m-2"

@@ -11,7 +11,7 @@ export default class WebsiteApp extends Component {
     super(props);
 
     this.state = {
-      keyword: "react api",
+      keyword: "",
       searchResults: [],
       page: 1,
       fileContent: null,
@@ -25,7 +25,7 @@ export default class WebsiteApp extends Component {
 
   componentDidMount() {
     console.log("componentDidMount", this.state);
-    this.getApiResult(".");
+    this.getApiResult("doc/websiteApp");
   }
 
   componentDidUpdate() {
@@ -67,13 +67,17 @@ export default class WebsiteApp extends Component {
     const results = await githubContentsApi
       .get("/" + fileName, {
         params: {
-          ref: "master",
+          ref: "redux",
         },
       })
       .catch((error) => {
-        console.log(error, results);
+        console.log(error, error.response);
         this.setState({
           loading: false,
+          fileContent:
+            "<div>Get API result failed, please ask the admin check the console log</div><div class='text-danger'>" +
+            error.response.data.message +
+            "</div>",
         });
       });
 
@@ -99,6 +103,16 @@ export default class WebsiteApp extends Component {
     let newResults = this.state.searchResults.filter(
       (item) => item.type == "file" && item.name.indexOf(".html") != -1
     );
+    if (this.state.keyword) {
+      newResults = newResults.filter(
+        (item) =>
+          item.name
+            .toLowerCase()
+            .replace(/-/g, " ")
+            .indexOf(this.state.keyword.toLowerCase()) != -1
+      );
+    }
+
     return newResults;
   };
 

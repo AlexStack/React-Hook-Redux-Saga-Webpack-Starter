@@ -56,12 +56,11 @@ export const githubContentsApi = axios.create({
   timeout: 3000,
   responseType: "json",
   params: {
-    per_page: 5,
+    ref: "master",
   },
   headers: {
     "Content-Type": "application/json",
-    // "X-Custom-Header": "AlexStack react starter example",
-    // Authorization: "Client Id change-here-if-authorization-needed",
+    Authorization: "token 176caff7c912f22ecbc0910aab2372f236e596db",
   },
 });
 

@@ -20,7 +20,7 @@ const WWebsiteAppResults = ({
                 name="showDetails"
                 className="btn btn-sm"
               >
-                {item.name}
+                {item.name.replace(/-/g, " ").replace(/.html/g, "")}
               </button>
               <div>
                 <i className="fas fa-download  text-success mr-1"></i>
