@@ -17,7 +17,7 @@ export default class WebsiteApp extends Component {
     this.state = {
       keyword: "",
       searchResults: [],
-      page: 1,
+      config: null,
       fileContent: null,
       total: null,
       loading: false,
@@ -116,9 +116,13 @@ export default class WebsiteApp extends Component {
           loading: false,
         });
       } else {
+        const searchResults = results.data.filter(
+          (item) => item.type == "file" && item.name.indexOf(".html") != -1
+        );
+
         this.setState({
-          searchResults: results.data,
-          total: results.data.length,
+          searchResults: searchResults,
+          total: searchResults.length,
           loading: false,
         });
       }
@@ -142,7 +146,9 @@ export default class WebsiteApp extends Component {
     if (results.data) {
       if (fileName.indexOf(githubRepository.configFile) != -1) {
         console.log(results);
-        return true;
+        this.setState({
+          config: results.data,
+        });
       }
       const fileContent =
         results.data.trim().indexOf("<div ") === 0
@@ -158,11 +164,8 @@ export default class WebsiteApp extends Component {
   }
 
   filterResults = () => {
-    let newResults = this.state.searchResults.filter(
-      (item) => item.type == "file" && item.name.indexOf(".html") != -1
-    );
     if (this.state.keyword) {
-      newResults = newResults.filter(
+      return this.state.searchResults.filter(
         (item) =>
           item.name
             .toLowerCase()
@@ -171,13 +174,14 @@ export default class WebsiteApp extends Component {
       );
     }
 
-    return newResults;
+    return this.state.searchResults;
   };
 
   render() {
     return (
       <div className="text-center">
         <WebsiteAppPresent
+          config={this.state.config}
           keyword={this.state.keyword}
           total={this.state.total}
           searchResults={this.filterResults()}
