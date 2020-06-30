@@ -29,7 +29,9 @@ export default class WebsiteApp extends Component {
 
   componentDidMount() {
     console.log("componentDidMount", this.state);
-    this.getRawFileContent(githubRepository.configFile);
+    this.getRawFileContent(
+      githubRepository.initDirectory + "/" + githubRepository.configFile
+    );
     this.listAllFiles();
   }
 
