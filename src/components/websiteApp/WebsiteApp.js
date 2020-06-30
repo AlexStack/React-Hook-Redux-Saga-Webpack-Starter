@@ -29,6 +29,7 @@ export default class WebsiteApp extends Component {
 
   componentDidMount() {
     console.log("componentDidMount", this.state);
+    this.getRawFileContent(githubRepository.configFile);
     this.listAllFiles();
   }
 
@@ -137,6 +138,10 @@ export default class WebsiteApp extends Component {
     });
 
     if (results.data) {
+      if (fileName.indexOf(githubRepository.configFile) != -1) {
+        console.log(results);
+        return true;
+      }
       const fileContent =
         results.data.trim().indexOf("<div ") === 0
           ? results.data

@@ -1,0 +1,5 @@
+{
+  "siteName": "Simple website using Github as backend",
+  "siteDescription": "Want built a simple ReactJs website? Why not use Github to maintain all the contents and use it as the backend API or database. This example list all .html files from your public Github repository through Github RESTful API",
+  "pageTitleClass": "text-info"
+}

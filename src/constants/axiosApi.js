@@ -54,6 +54,7 @@ export const githubRepository = {
   name: "AlexStack/React-Hook-Redux-Saga-Webpack-Starter",
   branch: "redux",
   initDirectory: "doc/websiteApp",
+  configFile: "0.websiteConfig.json",
   wrongFormatMsg:
     "<div>Error: File source not start with div, please ask the admin to fix it</div>",
   axiosErrorMsg:

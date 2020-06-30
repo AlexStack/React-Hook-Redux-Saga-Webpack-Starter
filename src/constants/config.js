@@ -3,7 +3,7 @@ export const REACTPATH = {
   Basic: "/basic1",
   Axios: "/axios2",
   Redux: "/redux3",
-  Website: "/document",
+  Website: "/document/:fileName?",
 };
 
 export const REDUXPATH = {
