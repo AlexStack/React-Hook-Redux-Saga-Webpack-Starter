@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import packagistApi from "../../constants/axiosApi";
-import AxiosAppPresent from "./AxiosAppPresent";
+import { githubContentsApi } from "../../constants/axiosApi";
+import WebsiteAppPresent from "./WebsiteAppPresent";
 import RelatedFiles from "../footer/RelatedFiles";
+import { Base64 } from "js-base64";
 
-export default class AxiosApp extends Component {
+export default class WebsiteApp extends Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +14,7 @@ export default class AxiosApp extends Component {
       keyword: "react api",
       searchResults: [],
       page: 1,
-      perPage: 5,
+      fileContent: null,
       total: null,
       loading: false,
     };
@@ -24,6 +25,7 @@ export default class AxiosApp extends Component {
 
   componentDidMount() {
     console.log("componentDidMount", this.state);
+    this.getApiResult(".");
   }
 
   componentDidUpdate() {
@@ -35,16 +37,17 @@ export default class AxiosApp extends Component {
       this.setState({
         keyword: event.target.value,
       });
-    } else if (event.target.name == "perPage") {
-      this.setState({
-        perPage: event.target.value,
-      });
-    } else if (event.target.name == "loadMore") {
-      const pageNumber = this.state.page + 1;
+    } else if (event.target.name == "showDetails") {
+      event.preventDefault();
       this.setState({
         loading: true,
       });
-      this.getApiResult(pageNumber);
+      this.getApiResult(event.target.value);
+    } else if (event.target.name == "returnToList") {
+      event.preventDefault();
+      this.setState({
+        fileContent: null,
+      });
     }
 
     console.log(this.state);
@@ -57,53 +60,56 @@ export default class AxiosApp extends Component {
       total: null,
       loading: true,
     });
-    this.getApiResult(1);
+    this.getApiResult(".");
   };
 
-  async getApiResult(pageNumber) {
-    const res = await packagistApi
-      .get("/search.json", {
+  async getApiResult(fileName) {
+    const results = await githubContentsApi
+      .get("/" + fileName, {
         params: {
-          q: this.state.keyword,
-          per_page: this.state.perPage,
-          page: pageNumber,
+          ref: "master",
         },
       })
       .catch((error) => {
-        console.log(error, res);
+        console.log(error, results);
         this.setState({
           loading: false,
         });
       });
 
-    if (res.data) {
-      console.log(res.data);
-      if (pageNumber > 1) {
+    if (results.data) {
+      if (results.data.type) {
+        console.log(Base64.decode(results.data.content));
         this.setState({
-          searchResults: [...this.state.searchResults, ...res.data.results],
-          total: res.data.total,
+          fileContent: Base64.decode(results.data.content),
           loading: false,
-          page: pageNumber,
         });
       } else {
         this.setState({
-          searchResults: res.data.results,
-          total: res.data.total,
+          searchResults: results.data,
+          total: null,
           loading: false,
-          page: 1,
         });
       }
     }
-    return res;
+    return results;
   }
+
+  filterResults = () => {
+    let newResults = this.state.searchResults.filter(
+      (item) => item.type == "file" && item.name.indexOf(".html") != -1
+    );
+    return newResults;
+  };
 
   render() {
     return (
       <div className="text-center">
-        <AxiosAppPresent
+        <WebsiteAppPresent
           keyword={this.state.keyword}
           total={this.state.total}
-          searchResults={this.state.searchResults}
+          searchResults={this.filterResults()}
+          fileContent={this.state.fileContent}
           handleFieldChange={this.handleFieldChange}
           handleSearchSubmit={this.handleSearchSubmit}
           loading={this.state.loading}
@@ -111,7 +117,7 @@ export default class AxiosApp extends Component {
 
         <RelatedFiles>
           <li className="list-group-item">
-            src/components/AxiosApp/*.js --- React Components
+            src/components/WebsiteApp/*.js --- React Components
           </li>
           <li className="list-group-item">
             src/api/AxiosApi.js --- Axios common settings

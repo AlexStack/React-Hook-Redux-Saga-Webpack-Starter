@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AxiosAppResults = ({
+const WWebsiteAppResults = ({
   total,
   searchResults,
   handleFieldChange,
@@ -14,12 +14,17 @@ const AxiosAppResults = ({
           <div className="row text-left border-bottom p-3" key={index}>
             <div className="col-md">
               <span className="badge badge-secondary">{index + 1}</span>{" "}
-              <a href={item.repository} target="_blank">
+              <button
+                value={item.path}
+                onClick={handleFieldChange}
+                name="showDetails"
+                className="btn btn-sm"
+              >
                 {item.name}
-              </a>
+              </button>
               <div>
                 <i className="fas fa-download  text-success mr-1"></i>
-                {item.downloads}
+                {item.size} {item.type}
               </div>
             </div>
             <div className="col-md text-secondary">{item.description}</div>
@@ -47,11 +52,11 @@ const AxiosAppResults = ({
   );
 };
 
-AxiosAppResults.propTypes = {
+WWebsiteAppResults.propTypes = {
   total: PropTypes.number,
   searchResults: PropTypes.array,
   handleFieldChange: PropTypes.func,
   loading: PropTypes.bool,
 };
 
-export default AxiosAppResults;
+export default WWebsiteAppResults;

@@ -1,27 +1,69 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import Api from "./apiServices";
+import sagaApi from "./sagaApiServices";
 // import { push } from "connected-react-router";
 import allActions, { actionTypes } from "../reduxStores/actions/allActions";
 import { myLog } from "../constants/config";
 
-function* listAllPage(action) {
+function* listItem(action) {
+  yield put(allActions.showLoading(true, action.nextPageToken));
+
   try {
-    const json = yield call(Api.listAllPage);
-    myLog("listAllPage-mylog", action.type, json);
-    yield put(allActions.listAllPageSuccess(json.data));
+    const json = yield call(
+      sagaApi.listItem,
+      action.keyword,
+      action.nextPageToken
+    );
+    console.log("listItem-mylog1", action.type, json);
+    yield put(
+      allActions.listItemSuccess(
+        json.data,
+        action.keyword,
+        action.nextPageToken
+      )
+    );
   } catch (e) {
-    yield put(allActions.listAllPageFailure(e.message));
+    yield put(allActions.listItemFailure(e.message));
   }
 }
 
-function* deletePage(action) {
+function* viewItem(action) {
   try {
-    const json = yield call(Api.deletePage, action.id);
+    const json = yield call(sagaApi.viewItem, action.item);
+    console.log("viewItem-mylog2", action.type, json);
+    yield put(allActions.viewItemSuccess(json.data, action.item));
+  } catch (e) {
+    yield put(allActions.viewItemFailure(e.message));
+  }
+}
+
+function* likeItem(action) {
+  try {
+    const json = yield call(sagaApi.likeItem, action.item);
+    console.log("likeItem-mylog3", action.type, json);
+    yield put(allActions.likeItemSuccess(json.data, action.item));
+  } catch (e) {
+    yield put(allActions.likeItemFailure(e.message));
+  }
+}
+
+function* unlikeItem(action) {
+  try {
+    const json = yield call(sagaApi.unlikeItem, action.item);
+    console.log("unlikeItem-mylog3", action.type, json);
+    yield put(allActions.unlikeItemSuccess(json.data, action.item));
+  } catch (e) {
+    yield put(allActions.unlikeItemFailure(e.message));
+  }
+}
+
+function* deleteItem(action) {
+  try {
+    const json = yield call(sagaApi.deleteItem, action.id);
     myLog(action, json);
-    yield put(allActions.deletePageSuccess(action.id));
+    yield put(allActions.deleteItemSuccess(action.id));
     // yield put(push("/listPage"));
   } catch (e) {
-    yield put(allActions.deletePageFailure(e.message));
+    yield put(allActions.deleteItemFailure(e.message));
   }
 }
 
@@ -34,9 +76,11 @@ function* setFilterKey(action) {
 }
 
 function* rootSaga() {
-  yield takeLatest(actionTypes.LIST_ALL_PAGE_REQUEST, listAllPage);
-
-  yield takeLatest(actionTypes.DELETE_PAGE_REQUEST, deletePage);
+  yield takeLatest(actionTypes.LIST_ITEM_REQUEST, listItem);
+  yield takeLatest(actionTypes.VIEW_ITEM_REQUEST, viewItem);
+  yield takeLatest(actionTypes.LIKE_ITEM_REQUEST, likeItem);
+  yield takeLatest(actionTypes.UNLIKE_ITEM_REQUEST, unlikeItem);
+  yield takeLatest(actionTypes.DELETE_ITEM_REQUEST, deleteItem);
 
   yield takeLatest(actionTypes.SET_FILTER_KEY_REQUEST, setFilterKey);
 }

@@ -3,17 +3,15 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { createLogger } from "redux-logger";
 import createRootReducer from "../reduxStores/reducers/allReducers";
 import { routerMiddleware } from "connected-react-router";
-
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { REACTPATH } from "../constants/config";
 
-export const history = createBrowserHistory({ basename: "/redux" });
+export const history = createBrowserHistory({ basename: REACTPATH.Redux });
 
 const initialState = {
   //router: null,
-  assignedTasks: [],
-  login: {},
-  myOwnTasks: {},
+  // videos: null,
 };
 
 const persistConfig = {

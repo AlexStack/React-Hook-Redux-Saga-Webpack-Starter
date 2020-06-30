@@ -1,8 +1,20 @@
 /* eslint-disable no-console */
-
-export const API_URI = "https://api.youtube.com";
-export const WWW_SITE = "...";
-export const MEMBER_SITE = "...";
-export const myLog = (variable) => {
-  console.log(variable);
+export const REACTPATH = {
+  Basic: "/basic1",
+  Axios: "/axios2",
+  Redux: "/redux3",
+  Website: "/document",
 };
+
+export const REDUXPATH = {
+  LikedVideos: "/LikedVideos2",
+  PlayedVideos: "/PlayedVideos5",
+  SearchVideos: "/SearchVideos3",
+};
+
+export const myLog = (var1, var2, var3) => {
+  console.log(var1, var2, var3);
+};
+
+export const lastPath = (prefix = "/") =>
+  prefix + document.location.pathname.split("/").slice(-1)[0];
