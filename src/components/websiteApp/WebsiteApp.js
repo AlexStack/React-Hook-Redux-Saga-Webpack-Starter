@@ -1,7 +1,11 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { githubContentsApi } from "../../constants/axiosApi";
+import {
+  githubContentsApi,
+  githubRawFile,
+  githubRepository,
+} from "../../constants/axiosApi";
 import WebsiteAppPresent from "./WebsiteAppPresent";
 import RelatedFiles from "../footer/RelatedFiles";
 import { Base64 } from "js-base64";
@@ -25,7 +29,7 @@ export default class WebsiteApp extends Component {
 
   componentDidMount() {
     console.log("componentDidMount", this.state);
-    this.getApiResult("doc/websiteApp");
+    this.listAllFiles();
   }
 
   componentDidUpdate() {
@@ -35,18 +39,24 @@ export default class WebsiteApp extends Component {
   handleFieldChange = (event) => {
     if (event.target.name == "keyword") {
       this.setState({
-        keyword: event.target.value,
+        keyword: event.target.value.trim(),
       });
     } else if (event.target.name == "showDetails") {
       event.preventDefault();
       this.setState({
         loading: true,
       });
-      this.getApiResult(event.target.value);
+      // this.getApiResult(event.target.value);
+      this.getRawFileContent(event.target.value);
     } else if (event.target.name == "returnToList") {
       event.preventDefault();
       this.setState({
         fileContent: null,
+      });
+    } else if (event.target.name == "displayAll") {
+      event.preventDefault();
+      this.setState({
+        keyword: "",
       });
     }
 
@@ -55,27 +65,41 @@ export default class WebsiteApp extends Component {
 
   handleSearchSubmit = (event) => {
     event.preventDefault();
-    this.setState({
-      searchResults: [],
-      total: null,
-      loading: true,
-    });
-    this.getApiResult(".");
+    if (!this.state.keyword && this.state.searchResults.length == 0) {
+      this.setState({
+        searchResults: [],
+        total: null,
+        loading: true,
+        fileContent: null,
+      });
+      this.listAllFiles();
+    } else if (this.state.fileContent) {
+      this.setState({
+        fileContent: null,
+      });
+    } else {
+      console.log("do nothing");
+    }
+  };
+
+  listAllFiles = (dir = githubRepository.initDirectory) => {
+    this.getApiResult(dir);
   };
 
   async getApiResult(fileName) {
     const results = await githubContentsApi
       .get("/" + fileName, {
         params: {
-          ref: "redux",
+          ref: githubRepository.branch,
         },
       })
       .catch((error) => {
-        console.log(error, error.response);
+        // console.log(error, error.response);
         this.setState({
           loading: false,
           fileContent:
-            "<div>Get API result failed, please ask the admin check the console log</div><div class='text-danger'>" +
+            githubRepository.axiosErrorMsg +
+            "<div class='text-danger'>" +
             error.response.data.message +
             "</div>",
         });
@@ -83,7 +107,7 @@ export default class WebsiteApp extends Component {
 
     if (results.data) {
       if (results.data.type) {
-        console.log(Base64.decode(results.data.content));
+        // console.log(Base64.decode(results.data.content));
         this.setState({
           fileContent: Base64.decode(results.data.content),
           loading: false,
@@ -91,11 +115,38 @@ export default class WebsiteApp extends Component {
       } else {
         this.setState({
           searchResults: results.data,
-          total: null,
+          total: results.data.length,
           loading: false,
         });
       }
     }
+    return results;
+  }
+
+  async getRawFileContent(fileName) {
+    const results = await githubRawFile.get("/" + fileName).catch((error) => {
+      // console.log(error, error.response);
+      this.setState({
+        loading: false,
+        fileContent:
+          githubRepository.axiosErrorMsg +
+          "<div class='text-danger'>" +
+          error.response.data.message +
+          "</div>",
+      });
+    });
+
+    if (results.data) {
+      const fileContent =
+        results.data.trim().indexOf("<div ") === 0
+          ? results.data
+          : githubRepository.wrongFormatMsg;
+      this.setState({
+        fileContent: fileContent,
+        loading: false,
+      });
+    }
+    // console.log(results);
     return results;
   }
 
