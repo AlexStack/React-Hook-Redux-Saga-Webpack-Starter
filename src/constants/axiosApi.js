@@ -49,19 +49,45 @@ export const backendApi = axios.create({
   },
 });
 
-// for websiteApp example
+// githubContentsApi for websiteApp example
+export const githubRepository = {
+  name: "AlexStack/React-Hook-Redux-Saga-Webpack-Starter",
+  branch: "redux",
+  initDirectory: "doc/websiteApp",
+  configFile: "0.websiteConfig.json",
+  wrongFormatMsg:
+    "<div>Error: File source not start with div, please ask the admin to fix it</div>",
+  axiosErrorMsg:
+    "<div>Get API result failed, please ask the admin to check the console log</div>",
+  token1: "0655a262b7ca299897f235",
+  token2: "cde0d924c4e4c05cde",
+};
+
 export const githubContentsApi = axios.create({
   baseURL:
-    "https://api.github.com/repos/AlexStack/React-Hook-Redux-Saga-Webpack-Starter/contents",
+    "https://api.github.com/repos/" + githubRepository.name + "/contents",
   timeout: 3000,
   responseType: "json",
   params: {
-    per_page: 5,
+    ref: githubRepository.branch,
   },
   headers: {
     "Content-Type": "application/json",
-    // "X-Custom-Header": "AlexStack react starter example",
-    // Authorization: "Client Id change-here-if-authorization-needed",
+    Authorization: "token " + githubRepository.token1 + githubRepository.token2,
+  },
+});
+
+// get github raw file to avoid api rate limit
+export const githubRawFile = axios.create({
+  baseURL:
+    "https://raw.githubusercontent.com/" +
+    githubRepository.name +
+    "/" +
+    githubRepository.branch,
+  timeout: 3000,
+  responseType: "text",
+  headers: {
+    "Content-Type": "text/plain",
   },
 });
 

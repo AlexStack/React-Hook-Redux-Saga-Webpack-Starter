@@ -8,11 +8,26 @@ const WebsiteAppFileContent = ({
   loading,
 }) => {
   return (
-    <div className="file-content">
-      {fileContent}
+    <div className="text-left file-content">
+      <button
+        className="btn btn-sm btn-info m-2"
+        name="returnToList"
+        onClick={handleFieldChange}
+        disabled={loading}
+      >
+        Return to list
+        {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
+      </button>
+
+      <div
+        className="main-content"
+        dangerouslySetInnerHTML={{
+          __html: fileContent.replace(/(<? *script)/gi, "illegalScript"),
+        }}
+      />
 
       <button
-        className="btn btn-success m-2"
+        className="btn btn-sm btn-info m-2"
         name="returnToList"
         onClick={handleFieldChange}
         disabled={loading}

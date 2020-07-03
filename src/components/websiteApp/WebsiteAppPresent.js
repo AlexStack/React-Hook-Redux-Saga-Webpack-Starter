@@ -4,6 +4,7 @@ import WebsiteAppResults from "./WebsiteAppResults";
 import WebsiteAppFileContent from "./WebsiteAppFileContent";
 
 const WebsiteAppPresent = ({
+  config,
   keyword,
   total,
   searchResults,
@@ -15,13 +16,8 @@ const WebsiteAppPresent = ({
   return (
     <div className="mt-1 mb-5 pt-5 pb-5 pl-4 text-dark">
       <div className="text-primary mb-3">
-        <h2>Simple website using Github as backend!</h2>
-        <div className="text-secondary">
-          Want built a simple ReactJs website? Why not use Github to maintain
-          all the contents and use it as the backend API or database. This
-          example list all .html files from your public Github repository
-          through Github RESTful API
-        </div>
+        <h2>{config && config.siteName}</h2>
+        <div className="text-secondary">{config && config.siteDescription}</div>
       </div>
 
       <form onSubmit={handleSearchSubmit}>
@@ -95,6 +91,7 @@ const WebsiteAppPresent = ({
 };
 
 WebsiteAppPresent.propTypes = {
+  config: PropTypes.object,
   keyword: PropTypes.string,
   total: PropTypes.number,
   searchResults: PropTypes.array,

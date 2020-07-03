@@ -20,32 +20,32 @@ const WWebsiteAppResults = ({
                 name="showDetails"
                 className="btn btn-sm"
               >
-                {item.name}
+                {item.name
+                  .replace(/-/g, " ")
+                  .replace(/.html/g, "")
+                  .replace(/(^\d+\.)/, "")}
               </button>
-              <div>
-                <i className="fas fa-download  text-success mr-1"></i>
-                {item.size} {item.type}
-              </div>
             </div>
-            <div className="col-md text-secondary">{item.description}</div>
           </div>
         ))}
       {total > 0 && total > searchResults.length && (
         <button
           className="btn btn-success m-2"
-          name="loadMore"
+          name="displayAll"
           onClick={handleFieldChange}
           disabled={loading}
         >
-          Load More Data
+          Display All Data
           {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
         </button>
       )}
+
       {/* Show additional information, pages, total */}
       {total === 0 && <div className="text-danger">No result</div>}
-      {total > 0 && (
+      {total > 0 && searchResults.length != total && (
         <div className="text-danger m-3">
-          Total results: {total} - Displaying {searchResults.length} of {total}
+          Found {searchResults.length} result
+          {searchResults.length > 1 && <>s</>} in {total}
         </div>
       )}
     </>
