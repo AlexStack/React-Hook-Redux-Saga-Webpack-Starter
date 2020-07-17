@@ -50,13 +50,10 @@ export const backendApi = axios.create({
 });
 
 // githubContentsApi for websiteApp example
-// https://github.com/Room14/classwork
 export const githubRepository = {
-  // name: "AlexStack/React-Hook-Redux-Saga-Webpack-Starter",
-  name: "Room14/classwork",
+  name: "AlexStack/React-Hook-Redux-Saga-Webpack-Starter",
   branch: "master",
-  // initDirectory: "doc/websiteApp",
-  initDirectory: ".",
+  initDirectory: "doc/websiteApp",
   configFile: "0.websiteConfig.json",
   wrongFormatMsg:
     "<div>Error: File source not start with div, please ask the admin to fix it</div>",
