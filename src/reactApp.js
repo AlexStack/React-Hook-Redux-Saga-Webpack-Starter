@@ -7,6 +7,7 @@ import WebsiteApp from "./components/WebsiteApp/WebsiteApp";
 import HeaderPresent from "./components/header/HeaderPresent";
 import FooterPresent from "./components/footer/FooterPresent";
 import ReduxApp from "./components/reduxApp/ReduxApp";
+import BasicHooks from "./components/hookApp/BasicHooks";
 import { REACTPATH } from "./constants/config";
 
 export default class ReactApp extends React.Component {
@@ -20,6 +21,7 @@ export default class ReactApp extends React.Component {
             <Route path={REACTPATH.Axios} component={AxiosApp} />
             <Route path={REACTPATH.Website} component={WebsiteApp} />
             <Route path={REACTPATH.Redux} component={ReduxApp} />
+            <Route path={REACTPATH.BasicHooks} component={BasicHooks} />
             <Route component={ReduxApp} />
           </Switch>
         </div>

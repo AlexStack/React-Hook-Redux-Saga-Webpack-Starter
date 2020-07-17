@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { REACTPATH, lastPath } from "../../constants/config";
 
 const BasicAppPresent = ({
   clickTimes,
@@ -13,7 +14,16 @@ const BasicAppPresent = ({
       <div className="text-primary mb-3">
         <h2>Secret key guess game!</h2>
         <div className="text-secondary">
-          Basic ReactJS example: using React state and components only
+          {REACTPATH.BasicHooks !== document.location.pathname ? (
+            <span>
+              Basic ReactJS example: using React this.state and components only
+            </span>
+          ) : (
+            <span>
+              Basic <span className="text-danger">Hooks</span> example: DO NOT
+              USE this.state and componentDidMount
+            </span>
+          )}
         </div>
         <div className="text-danger m-3">
           {secretKey

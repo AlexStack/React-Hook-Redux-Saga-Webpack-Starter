@@ -64,6 +64,16 @@ const HeaderPresent = () => {
                 Redux Saga
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink
+                to={REACTPATH.BasicHooks}
+                className="nav-link"
+                onClick={() => hideNavbar("")}
+              >
+                Basic Hooks
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>
