@@ -52,7 +52,7 @@ export const backendApi = axios.create({
 // githubContentsApi for websiteApp example
 export const githubRepository = {
   name: "AlexStack/React-Hook-Redux-Saga-Webpack-Starter",
-  branch: "redux",
+  branch: "master",
   initDirectory: "doc/websiteApp",
   configFile: "0.websiteConfig.json",
   wrongFormatMsg:

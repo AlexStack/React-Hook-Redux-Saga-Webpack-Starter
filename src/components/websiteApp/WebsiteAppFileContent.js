@@ -10,7 +10,7 @@ const WebsiteAppFileContent = ({
   return (
     <div className="text-left file-content">
       <button
-        className="btn btn-sm btn-info m-2"
+        className="btn btn-sm btn-outline-info m-2"
         name="returnToList"
         onClick={handleFieldChange}
         disabled={loading}
@@ -25,16 +25,19 @@ const WebsiteAppFileContent = ({
           __html: fileContent.replace(/(<? *script)/gi, "illegalScript"),
         }}
       />
-
-      <button
-        className="btn btn-sm btn-info m-2"
-        name="returnToList"
-        onClick={handleFieldChange}
-        disabled={loading}
-      >
-        Return to list
-        {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
-      </button>
+      <div className="row">
+        <div class="col text-right">
+          <button
+            className="btn btn-sm btn-info m-2"
+            name="returnToList"
+            onClick={handleFieldChange}
+            disabled={loading}
+          >
+            Return to list
+            {loading && <i className="fas fa-spinner fa-spin ml-1"></i>}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

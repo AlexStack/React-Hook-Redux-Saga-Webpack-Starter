@@ -11,7 +11,7 @@
 
 ## ReactJs code examples:
 
--   **Online DEMO** https://alexstack.github.io/reactStarter/public/
+-   **Online DEMO** https://alexstack.github.io/reactStarter/
 -   Basic ReactJS example: using React state and components only
 -   Axios RESTful API search example: A form using axios to implement a RESTful API search
 -   Redux Saga reducer example:

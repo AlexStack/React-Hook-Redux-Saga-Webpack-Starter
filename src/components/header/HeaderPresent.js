@@ -45,15 +45,6 @@ const HeaderPresent = () => {
                 Axios API
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                to={REACTPATH.Website}
-                className="nav-link"
-                onClick={() => hideNavbar("")}
-              >
-                Github API
-              </NavLink>
-            </li>
 
             <li className="nav-item">
               <NavLink
@@ -62,6 +53,26 @@ const HeaderPresent = () => {
                 onClick={() => hideNavbar("")}
               >
                 Redux Saga
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to={REACTPATH.BasicHooks}
+                className="nav-link"
+                onClick={() => hideNavbar("")}
+              >
+                Basic Hooks
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to={REACTPATH.Website}
+                className="nav-link"
+                onClick={() => hideNavbar("")}
+              >
+                Document
               </NavLink>
             </li>
           </ul>
