@@ -1,5 +1,4 @@
-import React, { Component, useState, useEffect, useLayoutEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useRef } from "react";
 import BasicAppPresent from "../basicApp/BasicAppPresent";
 import RelatedFiles from "../footer/RelatedFiles";
 
@@ -8,6 +7,23 @@ const BasicHooks = () => {
   const [keyPressTimes, setKeyPressTimes] = useState(0);
   const [pressedKey, setPressedKey] = useState("null");
   const [secretKey, setSecretKey] = useState(null);
+  const gameRef = useRef();
+  const pressedKeyRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress, false);
+    // invoke below cleanup function first when the useEffect re-call again(not the initial render)
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+
+      pressedKeyRef.current.focus();
+    };
+  }, [secretKey, pressedKey]);
+
+  useEffect(() => {
+    // example of use ref
+    gameRef.current.style.background = "rgba(0, 123, 255, 0.17)";
+  }, []); // Only invoke once == ComponentDidMount()
 
   const handleFieldChange = () => {
     setSecretKey(null);
@@ -32,22 +48,28 @@ const BasicHooks = () => {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress, false);
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [secretKey, pressedKey]);
-
   return (
     <div className="text-center">
-      <BasicAppPresent
-        clickTimes={clickTimes}
-        keyPressTimes={keyPressTimes}
-        pressedKey={pressedKey}
-        secretKey={secretKey}
-        handleFieldChange={handleFieldChange}
-      />
+      <div className="card mb-4" ref={gameRef}>
+        <BasicAppPresent
+          clickTimes={clickTimes}
+          keyPressTimes={keyPressTimes}
+          pressedKey={pressedKey}
+          secretKey={secretKey}
+          handleFieldChange={handleFieldChange}
+        />
+
+        <div className="mb-4" title="useRef() example">
+          <input
+            size="6"
+            ref={pressedKeyRef}
+            value={pressedKey == "null" ? "" : pressedKey}
+            className={`border-0 bg-transparent text-center ${
+              pressedKey == secretKey ? "d-none" : ""
+            }`}
+          />
+        </div>
+      </div>
 
       <RelatedFiles>
         <li className="list-group-item">
