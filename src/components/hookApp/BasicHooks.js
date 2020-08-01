@@ -8,18 +8,20 @@ const BasicHooks = () => {
   const [pressedKey, setPressedKey] = useState("null");
   const [secretKey, setSecretKey] = useState(null);
   const gameRef = useRef();
+  const pressedKeyRef = useRef();
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyPress, false);
     // invoke below cleanup function first when the useEffect re-call again(not the initial render)
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
+
+      pressedKeyRef.current.focus();
     };
   }, [secretKey, pressedKey]);
 
   useEffect(() => {
     // example of use ref
-    gameRef.current.focus();
     gameRef.current.style.background = "rgba(0, 123, 255, 0.17)";
   }, []); // Only invoke once == ComponentDidMount()
 
@@ -48,7 +50,7 @@ const BasicHooks = () => {
 
   return (
     <div className="text-center">
-      <div ref={gameRef}>
+      <div className="card mb-4" ref={gameRef}>
         <BasicAppPresent
           clickTimes={clickTimes}
           keyPressTimes={keyPressTimes}
@@ -56,6 +58,17 @@ const BasicHooks = () => {
           secretKey={secretKey}
           handleFieldChange={handleFieldChange}
         />
+
+        <div className="mb-4" title="useRef() example">
+          <input
+            size="6"
+            ref={pressedKeyRef}
+            value={pressedKey == "null" ? "" : pressedKey}
+            className={`border-0 bg-transparent text-center ${
+              pressedKey == secretKey ? "d-none" : ""
+            }`}
+          />
+        </div>
       </div>
 
       <RelatedFiles>
