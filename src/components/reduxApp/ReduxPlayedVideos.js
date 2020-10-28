@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import allActions from "../../reduxStores/actions/allActions";
-import VideoSearchForm from "./videoSearchForm";
-import VideoSearchResults from "./videoSearchResults";
+import VideoSearchForm from "./VideoSearchForm";
+import VideoSearchResults from "./VideoSearchResults";
 
 class ReduxPlayedVideos extends Component {
   constructor(props) {

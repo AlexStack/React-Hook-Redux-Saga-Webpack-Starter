@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import VideoPreview from "./videoPreview";
-import VideoPlay from "./videoPlay";
+import VideoPreview from "./VideoPreview";
+import VideoPlay from "./VideoPlay";
 
 const VideoSearchResults = ({
   total,
@@ -29,13 +29,13 @@ const VideoSearchResults = ({
                   wasLiked={wasLiked}
                 />
               ) : (
-                <VideoPlay
-                  item={item}
-                  handleFieldChange={handleFieldChange}
-                  index={index}
-                  wasLiked={wasLiked}
-                />
-              )}
+                  <VideoPlay
+                    item={item}
+                    handleFieldChange={handleFieldChange}
+                    index={index}
+                    wasLiked={wasLiked}
+                  />
+                )}
             </div>
           );
         })}
