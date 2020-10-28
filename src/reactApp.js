@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BasicApp from "./components/basicApp/BasicApp";
 import AxiosApp from "./components/axiosApp/AxiosApp";
-import WebsiteApp from "./components/WebsiteApp/WebsiteApp";
+import WebsiteApp from "./components/websiteApp/WebsiteApp";
 import HeaderPresent from "./components/header/HeaderPresent";
 import FooterPresent from "./components/footer/FooterPresent";
 import ReduxApp from "./components/reduxApp/ReduxApp";

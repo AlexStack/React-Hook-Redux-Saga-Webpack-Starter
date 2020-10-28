@@ -1,7 +1,7 @@
 import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, compose } from "redux";
 //import { createLogger } from "redux-logger";
-import createRootReducer from "../reduxStores/Reducers/allReducers";
+import createRootReducer from "./reducers/allReducers";
 import { routerMiddleware } from "connected-react-router";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
