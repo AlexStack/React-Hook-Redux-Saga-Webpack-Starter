@@ -23,8 +23,8 @@ export const youtubeApi = axios.create({
   responseType: "json",
   params: {
     // replace below key to your own google-youtube-api-key for more quotas
-    key: "AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw",
-    // key: "AIzaSyCSUjqlOe2fK8_2Iw8IXTy9RZ8XOGQ3Mvg",
+    // key: "AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw",
+    key: "AIzaSyCSUjqlOe2fK8_2Iw8IXTy9RZ8XOGQ3Mvg",
     maxResults: 10,
   },
   headers: {
