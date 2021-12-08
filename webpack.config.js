@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  // define entry file and output
+  // mode: "development",
   entry: "./src/reactApp.js",
   output: {
     path: path.resolve("public/asset/js"),
@@ -23,10 +23,10 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     historyApiFallback: true,
-    contentBase: "public",
+    // contentBase: "public",
     compress: false,
-    inline: true,
-    progress: true,
+    // inline: true,
+    // progress: true,
     hot: true,
     port: 9999,
   },

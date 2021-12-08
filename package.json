@@ -43,7 +43,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --hot --inline --mode development",
+    "dev": "webpack-dev-server --open --hot --mode development",
     "watch": "webpack --watch",
     "build": "webpack --mode production"
   },

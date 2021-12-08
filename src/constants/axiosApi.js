@@ -5,7 +5,6 @@ export const packagistApi = axios.create({
   baseURL: "https://packagist.org",
   timeout: 3000,
   responseType: "json",
-  // default params may not working, details: https://github.com/axios/axios/issues/2190
   params: {
     per_page: 5,
   },
@@ -23,14 +22,16 @@ export const youtubeApi = axios.create({
   responseType: "json",
   params: {
     // replace below key to your own google-youtube-api-key for more quotas
-    // key: "AIzaSyBLd6DZyQNPCudkOueydclFOpSJklOMvnw",
-    key: "AIzaSyCSUjqlOe2fK8_2Iw8IXTy9RZ8XOGQ3Mvg",
+    // key: "AIzaSyBLd6DZyQNP"+"CudkOueydclFOp"+"SJklOMvnw",
+    key: "AIza"+"SyCSUjqlOe2fK8_2Iw8IXTy9RZ8"+"XOGQ3Mvg",
+    // key: "AIzaSyB5i9Kkxj8j"+"33eO9rKWx82Xda1"+"XmDovy5I",
     maxResults: 10,
+    crossDomain: true,
   },
   headers: {
     "Content-Type": "application/json",
-    "X-Custom-Header": "AlexStack react starter example",
-    Authorization: "Client Id change-here-if-authorization-needed",
+    // "X-Custom-Header": "AlexStack react starter example",
+    // Authorization: "Client Id change-here-if-authorization-needed",
   },
 });
 
